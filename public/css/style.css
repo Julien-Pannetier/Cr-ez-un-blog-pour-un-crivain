@@ -140,7 +140,7 @@ Header
     height: 100%;
     overflow: hidden;
     z-index: 10;
-    background: url("../images/background.jpg") #c0c0c0 bottom center fixed no-repeat;
+    background: url("../images/background_homepage.jpg") #c0c0c0 bottom center fixed no-repeat;
     background-size: cover;
 }
 
@@ -308,6 +308,29 @@ Section Blog
 }
 
 /* ==========================================================================
+Section Post
+========================================================================== */
+.post {
+    position: relative;
+    width: 100%;
+    background: #f3f3f3;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.post__container {
+    position: relative;
+    width: 900px;
+    margin: 0 auto;
+    
+}
+
+.post__text {
+    text-align: justify;
+    margin-bottom: 100px;
+}
+
+/* ==========================================================================
 Section Contact
 ========================================================================== */
 .contact {
@@ -385,6 +408,106 @@ Section Contact
     background: #ada074;
     color: white;
     border: 1px solid #ada074;
+}
+
+/* ==========================================================================
+Section Commentaires
+========================================================================== */
+.comment {
+    position: relative;
+    width: 100%;
+    background: white;
+    margin-bottom: 106px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.comment__text_center {
+    text-align: center;
+}
+
+.comment__content {
+    position: relative;
+    width: 900px;
+    overflow: hidden;
+    margin: 60px auto 65px auto;
+}
+
+.comment__form {
+    width: 500px;
+    margin: auto;
+    overflow: hidden;
+    height: auto;
+}
+
+.comment__form_name {
+    width: 180px;
+    overflow: hidden;
+    height: auto;
+    float: left;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+.comment__form_email {
+    width: 260px;
+    padding-left: 60px;
+    overflow: hidden;
+    height: auto;
+    float: left;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+.comment__form_message {
+    width: 500px;
+    overflow: hidden;
+    height: auto;
+    letter-spacing: 1px;
+}
+
+.comment__form_submit {
+    display: block;
+    width: 183px;
+    height: 47px;
+    line-height: 47px;
+    margin: 50px auto 100px;
+    border: 1px solid #333333;
+    padding-left: 0;     
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    color: #333333;    
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: none;
+    transition: all 0.6s ease-in;
+}
+
+.comment__form_submit:hover {
+    background: #ada074;
+    color: white;
+    border: 1px solid #ada074;
+}
+
+.comment__list {
+    overflow: hidden;
+    height: auto;
+    letter-spacing: 1px;
+}
+
+.comment__list_message {
+    background: #f8f7f7;
+    border-top: 1px solid #333;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    color: #333;
+    font-weight: 300;
+    line-height: 30px;
+    padding-left: 15px;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 /* ==========================================================================

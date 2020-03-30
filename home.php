@@ -97,12 +97,13 @@
                             </p>
                             <p class="blog__text">
                                 <?= nl2br(htmlspecialchars($data['content'])) ?><br>
-                                <a class="blog__button button" href="#">Lire la suite</a>
+                                <a class="blog__button button" href="postpage.php?id=<?= htmlspecialchars($data['id']) ?>">Lire la suite</a>
                             </p>
                         </div>
                     <?php
                     }
-                    ?>                 
+                    $req->closeCursor();
+                    ?>
             </div>
         </section> 
 
