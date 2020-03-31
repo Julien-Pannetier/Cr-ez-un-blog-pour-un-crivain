@@ -70,40 +70,27 @@
         <section class="blog" id="blog">
             <div class="blog__container">
                 <h2>Derniers billets de blog</h2>
+                
                 <?php
-                    // Connexion à la base de données
-                    try
-                    {
-                        $db = new PDO('mysql:host=localhost;dbname=forteroche;charset=utf8', 'root', '');
-                    }
-                    catch(Exception $e)
-                    {
-                            die('Erreur : '.$e->getMessage());
-                    }
-
-                    // On récupère les 5 derniers billets
-                    $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, "%d/%m/%Y") AS date FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
-
-                    while ($data = $req->fetch())
-                    {
-                    ?>
-                        <div>
-                            <hr/>
-                            <h3>
-                                <?= htmlspecialchars($data['title']) ?>    
-                            </h3>
-                            <p>
-                                <em>Publié le <?= $data['date'] ?></em>
-                            </p>
-                            <p class="blog__text">
-                                <?= nl2br(htmlspecialchars($data['content'])) ?><br>
-                                <a class="blog__button button" href="postpage.php?id=<?= htmlspecialchars($data['id']) ?>">Lire la suite</a>
-                            </p>
-                        </div>
-                    <?php
-                    }
-                    $req->closeCursor();
-                    ?>
+                while ($data = $posts->fetch())
+                {
+                ?>
+                    <div>
+                        <hr/>
+                        <h3>
+                            <?= htmlspecialchars($data['title']) ?>    
+                        </h3>
+                        <p>
+                            <em>Publié le <?= $data['date'] ?></em>
+                        </p>
+                        <p class="blog__text">
+                            <?= nl2br(htmlspecialchars($data['content'])) ?><br>
+                            <a class="blog__button button" href="index.php?action=post&amp;id=<?= htmlspecialchars($data['id']) ?>">Lire la suite</a>
+                        </p>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
         </section> 
 

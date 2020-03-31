@@ -31,29 +31,13 @@
         <!-- Section Post -->
         <section class="post" id="post">
             <div class="post__container">
-                <?php
-                    // Connexion à la base de données
-                    try
-                    {
-                        $db = new PDO('mysql:host=localhost;dbname=forteroche;charset=utf8', 'root', '');
-                    }
-                    catch(Exception $e)
-                    {
-                            die('Erreur : '.$e->getMessage());
-                    }
-
-                    // // Récupération du billet
-                    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, "%d/%m/%Y") AS date FROM posts WHERE id = ?');
-                    $req-> execute(array($_GET['id']));
-                    $data = $req->fetch();
-                ?>
-                <h2><?= htmlspecialchars($data['title']) ?></h2>
+                <h2><?= htmlspecialchars($post['title']) ?></h2>
                 <hr/>
                 <p>
-                    <em>Publié le <?= $data['date'] ?></em>
+                    <em>Publié le <?= $post['date'] ?></em>
                 </p>
                 <p class="post__text">
-                    <?= nl2br(htmlspecialchars($data['content'])) ?>
+                    <?= nl2br(htmlspecialchars($post['content'])) ?>
                 </p>
             </div>
         </section>
@@ -67,7 +51,7 @@
             </p>
             <div class="comment__content">
                 <div class="comment__form">
-                    <form action="comment.php?id=<?= $data['id'] ?>" method="POST">
+                    <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="POST">
                         <div class="comment__form_name">
                             <label for="name">NOM :</label><br><br>
                             <input type="text" name="name" id="name" required>
@@ -86,25 +70,19 @@
                     </form>
                 </div>
                 <?php
-                    $req->closeCursor();
-                    // Récupération des commentaires
-                    $req = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments WHERE post_id = ? ORDER BY comment_date');
-                    $req->execute(array($_GET['id']));
-
-                    while ($comment = $req->fetch())
-                    {
-                    ?>
-                    <div class="comment__list">
-                        <p class="comment__list_author">
-                            <strong><?= htmlspecialchars($comment['author']) ?></strong><em> le <?= $comment['date'] ?></em>
-                        </p>
-                        <p class="comment__list_message">
-                            <?= nl2br(htmlspecialchars($comment['comment'])) ?>
-                        </p>
-                    </div>
-                    <?php
-                    }
-                    $req->closeCursor();
+                while ($comment = $comments->fetch())
+                {
+                ?>
+                <div class="comment__list">
+                    <p class="comment__list_author">
+                        <strong><?= htmlspecialchars($comment['author']) ?></strong><em>, le <?= $comment['date'] ?></em>
+                    </p>
+                    <p class="comment__list_message">
+                        <?= nl2br(htmlspecialchars($comment['comment'])) ?>
+                    </p>
+                </div>
+                <?php
+                }
                 ?>
             </div>
         </section>
