@@ -1,27 +1,34 @@
 <?php
-require ('./model/frontend.php');
+require ('./model/Database.php');
+require ('./model/PostManager.php');
+require ('./model/CommentManager.php');
 
 function listPosts()
 {
-	$posts = getPosts();
+	$postManager = new PostManager();
+	$posts = $postManager->getPosts();
 
 	require('./view/frontend/home.php');
 }
 
 function post()
 {
-	$post = getPost($_GET['id']);
-	$comments = getComments($_GET['id']);
+	$postManager = new PostManager();
+	$commentManager = new CommentManager();
+	
+	$post = $postManager->getPost($_GET['id']);
+	$comments = $commentManager->getComments($_GET['id']);
 
 	require('./view/frontend/postpage.php');
 }
 
 function addComment($postId, $author, $authorEmail, $comment)
 {
-	$affectedLines = postComment($postId, $author, $authorEmail, $comment);
+	$commentManager = new CommentManager();
+	$affectedLines = $commentManager->postComment($postId, $author, $authorEmail, $comment);
 
 	if ($affectedLines === false) {
-		die('Impossible d\ajouter le commentaire !');
+		die("Impossible d'ajouter le commentaire !");
 	} else {
 		header('Location: index.php?action=post&id=' . $postId);
 	}
