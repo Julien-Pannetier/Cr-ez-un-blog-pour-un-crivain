@@ -24,6 +24,9 @@ if (isset($_GET['action'])) {
             echo 'Erreur : aucun identifiant de billet envoyé';
         }
     }
+    else if ($_GET['action'] == 'login') {
+        login();
+    }
 } else {
     listPosts();
 }

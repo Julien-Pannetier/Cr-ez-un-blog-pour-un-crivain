@@ -26,3 +26,8 @@ function addComment($postId, $author, $authorEmail, $comment)
 		header('Location: index.php?action=post&id=' . $postId);
 	}
 }
+
+function login() 
+{
+	require('./view/frontend/login.php');
+}

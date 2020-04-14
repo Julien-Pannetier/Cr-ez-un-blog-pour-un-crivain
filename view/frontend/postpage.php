@@ -1,103 +1,90 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        <title>Jean Forteroche</title>
+<?php ob_start(); ?>
 
-        <link rel="stylesheet" href="./public/css/style.css" />
+<!-- Header -->
+<header id="masthead" class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+        <div class="mx-auto text-center">
+            <h1 class="mx-auto my-0 text-uppercase">Jean Forteroche</h1>
+            <h2 class="text-white-50 mx-auto mt-2 mb-5">Billet simple pour l'Alaska</h2>
+            <a href="#about" class="btn btn-primary js-scroll-trigger">Découvrir</a>
+        </div>
+    </div>
+</header>
 
-    </head>
-    
-    <body>
-
-        <!-- Header -->
-        <header class="home" id="home">
-            <div class="home__background_opacity">
-                <div class="home__container">
-                    <div class="home__content">
-                        <h1>Jean Forteroche</h1>
-                        <hr class="home__breakElement_white" />
-                        <p class="home__text_white">
-                            Billet simple pour l'Alaska
-                        </p>
-                    </div>
-                    <div class="home__arrowDown"></div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Section Post -->
-        <section class="post" id="post">
-            <div class="post__container">
-                <h2><?= htmlspecialchars($post['title']) ?></h2>
-                <hr/>
-                <p>
+<!-- Post Section  -->
+<section id="post" class="post-section text-center bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="text-black mb-4">
+                    <?= htmlspecialchars($post['title']) ?>
+                </h2>
+                <hr class="d-none d-lg-block mb-5">
+                <p class="text-black-50 text-left mb-3">
                     <em>Publié le <?= $post['date'] ?></em>
                 </p>
-                <p class="post__text">
+                <p class="text-black-50 text-justify mb-5">
                     <?= nl2br(htmlspecialchars($post['content'])) ?>
                 </p>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!-- Commentaires -->
-        <section class="comment" id="comment">
-            <h2>Laisser un commentaire</h2>
-            <hr/>
-            <p class="comment__text_center">
-                Votre adresse de messagerie ne sera pas publiée.
-            </p>
-            <div class="comment__content">
-                <div class="comment__form">
-                    <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="POST">
-                        <div class="comment__form_name">
-                            <label for="name">NOM :</label><br><br>
-                            <input type="text" name="name" id="name" required>
+<!-- Comment Section -->
+<section id="comment" class="comment-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <h2 class="text-black mb-4">
+                    LAISSER UN COMMENTAIRE
+                </h2>
+                <hr class="d-none d-lg-block mb-5">
+                <p class="mb-5">
+                    Votre adresse de messagerie ne sera pas publiée.
+                </p>
+                <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-5 text-left">
+                            <label for="name">NOM :</label>
+                            <input type="text" name="name" id="name">
                         </div>
-                        <div class="comment__form_email">
-                            <label for="email">ADRESSE DE MESSAGERIE :</label><br><br>
-                            <input type="email" name="email" id="email" required>
+                        <div class="form-group col-md-6 offset-md-1 text-left">
+                            <label for="email">ADRESSE DE MESSAGERIE :</label>
+                            <input type="email" name="email" id="email">
                         </div>
-                        <div class="comment__form_message">
-                            <label for="message">MESSAGE :</label><br><br>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <div>
-                            <input class="comment__form_submit submit" id="submit" name="submit" type="submit" value="ENVOYER">
-                        </div>
-                    </form>
-                </div>
-                <?php
-                while ($comment = $comments->fetch())
-                {
-                ?>
-                <div class="comment__list">
-                    <p class="comment__list_author">
-                        <strong><?= htmlspecialchars($comment['author']) ?></strong><em>, le <?= $comment['date'] ?></em>
-                    </p>
-                    <p class="comment__list_message">
-                        <?= nl2br(htmlspecialchars($comment['comment'])) ?>
-                    </p>
-                </div>
-                <?php
-                }
-                ?>
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="message">MESSAGE :</label>
+                        <textarea id="message" name="message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ENVOYER</button>
+                </form>
             </div>
-        </section>
+        </div>
+        <?php
+        while ($comment = $comments->fetch())
+        {
+        ?>
+        <div>
+            <p>
+                <strong><?= htmlspecialchars($comment['author']) ?></strong><em>, le <?= $comment['date'] ?></em>
+            </p>
+            <p class="text-justify">
+                <?= nl2br(htmlspecialchars($comment['comment'])) ?>
+            </p>
+            <div class="text-center">
+                <a class="btn btn-primary mt-1 " href="#" >
+                    Signaler
+                </a>
+            </div>
+        </div>
+        <?php
+        }
+        ?>
+    </div>
+</section>
 
-        <!-- Footer -->
-        <footer class="footer" id="footer">
-            <nav class="footer__nav">
-                <ul class="footer__items">
-                    <li class="footer__item"><a class="footer__link" href="#home">Accueil</a></li>
-                    <li class="footer__item"><a class="footer__link" href="#about">A propos</a></li>
-                    <li class="footer__item"><a class="footer__link" href="#blog">Blog</a></li>
-                    <li class="footer__item"><a class="footer__link" href="#contact">Contact</a></li>
-                    <li class="footer__item"><a class="footer__link" href="#">Admin</a></li>
-                </ul>
-            </nav>
-        </footer>
-    </body>
-</html>
+<?php $content = ob_get_clean(); ?>
+
+<?php require('template.php'); ?>
