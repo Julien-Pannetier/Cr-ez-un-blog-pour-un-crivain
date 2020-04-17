@@ -6,10 +6,18 @@
         <div class="mx-auto text-center">
             <h1 class="mx-auto my-0 text-uppercase">Jean Forteroche</h1>
             <h2 class="text-white-50 mx-auto mt-2 mb-5">Billet simple pour l'Alaska</h2>
-            <a href="#about" class="btn btn-primary js-scroll-trigger">Découvrir</a>
         </div>
     </div>
 </header>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg bg-light" id="mainNav">
+    <div class="container">
+        <div class="text-left">
+            <a href="index.php" class="btn btn-primary mb-0">Retour</a>
+        </div>
+    </div>
+</nav>
 
 <!-- Post Section  -->
 <section id="post" class="post-section text-center bg-light">
@@ -17,15 +25,17 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2 class="text-black mb-4">
-                    <?= htmlspecialchars($post['title']) ?>
+                    <?= htmlspecialchars($post->title) ?>
                 </h2>
                 <hr class="d-none d-lg-block mb-5">
                 <p class="text-black-50 text-left mb-3">
-                    <em>Publié le <?= $post['date'] ?></em>
+                    <em>Publié le <?= $post->date ?></em>
                 </p>
                 <p class="text-black-50 text-justify mb-5">
-                    <?= nl2br(htmlspecialchars($post['content'])) ?>
+                    <?= nl2br(htmlspecialchars($post->content)) ?>
                 </p>
+                <a href="index.php" class="btn btn-primary my-0">Précédent</a>
+                <a href="index.php" class="btn btn-primary my-0">Suivant</a>
             </div>
         </div>
     </div>
@@ -43,7 +53,7 @@
                 <p class="mb-5">
                     Votre adresse de messagerie ne sera pas publiée.
                 </p>
-                <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="POST">
+                <form action="index.php?action=addComment&amp;id=<?= $post->id ?>" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-5 text-left">
                             <label for="name">NOM :</label>
@@ -68,10 +78,10 @@
         ?>
         <div>
             <p>
-                <strong><?= htmlspecialchars($comment['author']) ?></strong><em>, le <?= $comment['date'] ?></em>
+                <strong><?= htmlspecialchars($comment->author) ?></strong><em>, le <?= $comment->date ?></em>
             </p>
             <p class="text-justify">
-                <?= nl2br(htmlspecialchars($comment['comment'])) ?>
+                <?= nl2br(htmlspecialchars($comment->comment)) ?>
             </p>
             <div class="text-center">
                 <a class="btn btn-primary mt-1 " href="#" >
