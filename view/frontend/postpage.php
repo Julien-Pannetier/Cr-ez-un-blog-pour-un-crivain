@@ -53,7 +53,7 @@
                 <p class="mb-5">
                     Votre adresse de messagerie ne sera pas publiée.
                 </p>
-                <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="POST">
+                <form action="index.php?action=addComment&amp;id=<?= $post->id ?>" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-5 text-left">
                             <label for="name">NOM :</label>
@@ -78,7 +78,7 @@
         ?>
         <div>
             <p>
-                <strong><?= htmlspecialchars($comment->author) ?></strong><em>, le <?= $comment['date'] ?></em>
+                <strong><?= htmlspecialchars($comment->author) ?></strong><em>, le <?= $comment->date ?></em>
             </p>
             <p class="text-justify">
                 <?= nl2br(htmlspecialchars($comment->comment)) ?>

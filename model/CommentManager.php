@@ -10,7 +10,9 @@ class CommentManager extends Database {
 
     public function postComment($postId, $author, $authorEmail, $comment) {
         $query = 'INSERT INTO comments(post_id, author, author_email, comment, comment_date) VALUES(?, ?, ?, ?, NOW())';
-        
-        return $this->query($query, [$postId, $author, $authorEmail, $comment]);
+        $affectedLines = $this->query($query, [$postId, $author, $authorEmail, $comment]);
+
+        return $affectedLines;
+
     }
 }
