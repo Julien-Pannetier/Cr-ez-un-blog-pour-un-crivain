@@ -11,6 +11,6 @@ class PostManager extends Database {
     public function getPost($postId) {
         $query = 'SELECT id, title, content, DATE_FORMAT(creation_date, "%d/%m/%Y") AS date FROM posts WHERE id = ?';
         
-        return $this->query($query, [$postId]);
+        return $this->query($query, [$postId])->fetch();
     }
 }

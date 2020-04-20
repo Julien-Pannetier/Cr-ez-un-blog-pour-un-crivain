@@ -1,7 +1,8 @@
 <?php
-require ('./model/Database.php');
-require ('./model/PostManager.php');
-require ('./model/CommentManager.php');
+require_once ('./model/Database.php');
+require_once ('./model/PostManager.php');
+require_once ('./model/CommentManager.php');
+
 
 function listPosts()
 {
@@ -16,7 +17,7 @@ function post()
 	$postManager = new PostManager();
 	$commentManager = new CommentManager();
 	
-	$post = $postManager->getPost($_GET['id'])->fetch();
+	$post = $postManager->getPost($_GET['id']);
 	$comments = $commentManager->getComments($_GET['id']);
 
 	require('./view/frontend/postpage.php');
@@ -34,7 +35,7 @@ function addComment($postId, $author, $authorEmail, $comment)
 	}
 }
 
-function login() 
+function displayLogin()
 {
-	require('./view/frontend/login.php');
+	require('./view/backend/login.php');
 }

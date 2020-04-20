@@ -33,6 +33,18 @@
                     <a class="nav-link js-scroll-trigger" href="#contact">CONTACT</a>
                 </li>
             </ul>
+            <?php if(isset($_SESSION['admin'])) { ?>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="index.php?action=dashbord">Administration</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.php?action=logout">Se déconnecter</a>
+                        </div>
+                    </li>
+                </ul>
+            <?php } ?>
         </div>
     </div>
 </nav>

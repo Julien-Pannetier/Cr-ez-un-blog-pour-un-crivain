@@ -13,6 +13,5 @@ class CommentManager extends Database {
         $affectedLines = $this->query($query, [$postId, $author, $authorEmail, $comment]);
 
         return $affectedLines;
-
     }
 }
