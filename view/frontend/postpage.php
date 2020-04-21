@@ -47,8 +47,34 @@
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
                 <h2 class="text-black mb-4">
-                    LAISSER UN COMMENTAIRE
+                    COMMENTAIRES
                 </h2>
+                <hr class="d-none d-lg-block mb-5">
+            </div>
+        </div>
+        <?php
+        while ($comment = $comments->fetch())
+        {
+        ?>
+        <div class="mb-5">
+            <p>
+                <strong><?= htmlspecialchars($comment->author) ?></strong><em>, le <?= $comment->date ?></em>
+                <a class="ml-3 text-danger" href="index.php?action=reportComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Signaler ce commentaire !">
+                    <i class="fas fa-flag"></i>
+                </a>
+            </p>
+            <p class="text-justify">
+                <?= nl2br(htmlspecialchars($comment->comment)) ?>
+            </p>
+        </div>
+        <?php
+        }
+        ?>
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <h3 class="text-black mt-4 mb-4">
+                    LAISSER UN COMMENTAIRE
+                </h3>
                 <hr class="d-none d-lg-block mb-5">
                 <p class="mb-5">
                     Votre adresse de messagerie ne sera pas publiée.
@@ -72,26 +98,6 @@
                 </form>
             </div>
         </div>
-        <?php
-        while ($comment = $comments->fetch())
-        {
-        ?>
-        <div>
-            <p>
-                <strong><?= htmlspecialchars($comment->author) ?></strong><em>, le <?= $comment->date ?></em>
-            </p>
-            <p class="text-justify">
-                <?= nl2br(htmlspecialchars($comment->comment)) ?>
-            </p>
-            <div class="text-center">
-                <a class="btn btn-primary mt-1 " href="#" >
-                    Signaler
-                </a>
-            </div>
-        </div>
-        <?php
-        }
-        ?>
     </div>
 </section>
 

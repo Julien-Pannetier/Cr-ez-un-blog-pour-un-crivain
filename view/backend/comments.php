@@ -1,14 +1,13 @@
-<?php $title = 'Jean Forteroche - Administration'; ?>
+<?php $title = 'Jean Forteroche - Commentaires'; ?>
 
 <?php ob_start(); ?>
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Tableau de bord</h1>
+                <h1 class="mt-4">Commentaires</h1>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-flag mr-1"></i>Commentaires signalés
-                    </div>
+                        <i class="fas fa-comments mr-1"></i>Liste des commentaires</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -16,35 +15,29 @@
                                     <tr>
                                         <th>Auteur</th>
                                         <th>Commentaire</th>
-                                        <th>Signalements</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    while ($reportComment = $reportComments->fetch())
+                                    while ($comment = $comments->fetch())
                                     {
                                     ?>
                                         <tr>
-                                            <td><?= htmlspecialchars($reportComment->author) ?></td>
+                                            <td><?= htmlspecialchars($comment->author) ?></td>
                                             <td class="text-justify">
-                                                <em>Publié le <?= $reportComment->date ?></em><br>
-                                                <?= htmlspecialchars($reportComment->comment) ?>    
+                                                <em>Publié le <?= $comment->date ?></em><br>
+                                                <?= htmlspecialchars($comment->comment) ?>    
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <?= $reportComment->reported ?>  
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex justify-content-center">
-                                                    <a class="btn btn-success mx-1" href="index.php?action=approveComment&amp;id=<?= htmlspecialchars($reportComment->id) ?>" title="Approuver">
+                                                    <a class="btn btn-success mx-1" href="index.php?action=approveComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Approuver">
                                                         <i class="fas fa-check"></i>
                                                     </a>
-                                                    <a class="btn btn-warning mx-1" href="index.php?action=modifyComment&amp;id=<?= htmlspecialchars($reportComment->id) ?>" title="Modifier">
+                                                    <a class="btn btn-warning mx-1" href="index.php?action=modifyComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a class="btn btn-danger mx-1" href="index.php?action=deleteComment&amp;id=<?= htmlspecialchars($reportComment->id) ?>" title="Supprimer">
+                                                    <a class="btn btn-danger mx-1" href="index.php?action=deleteComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Supprimer">
                                                         <i class="fas fa-times"></i>
                                                     </a>
                                                 </div>

@@ -12,13 +12,13 @@ function listPosts()
 	require('./view/frontend/home.php');
 }
 
-function post()
+function post($postId)
 {
 	$postManager = new PostManager();
 	$commentManager = new CommentManager();
 	
-	$post = $postManager->getPost($_GET['id']);
-	$comments = $commentManager->getComments($_GET['id']);
+	$post = $postManager->getPost($postId);
+	$comments = $commentManager->getComments($postId);
 
 	require('./view/frontend/postpage.php');
 }
@@ -33,6 +33,19 @@ function addComment($postId, $author, $authorEmail, $comment)
 	} else {
 		header('Location: index.php?action=post&id=' . $postId);
 	}
+}
+
+function reportComment($commentId)
+{
+	$commentManager = new CommentManager();
+	$reportComment = $commentManager->reportComment($commentId);
+
+	if ($reportComment === false) {
+        throw new Exception('Impossible de signaler le commentaire !');
+    }
+    else {
+        header('Location: index.php');
+    }
 }
 
 function displayLogin()
