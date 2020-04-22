@@ -33,7 +33,7 @@
                     <a class="nav-link js-scroll-trigger" href="#contact">CONTACT</a>
                 </li>
             </ul>
-            <?php if(isset($_SESSION['admin'])) { ?>
+            <?php if(isset($_SESSION['admin'])): ?>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
@@ -44,7 +44,7 @@
                         </div>
                     </li>
                 </ul>
-            <?php } ?>
+            <?php endif ?>
         </div>
     </div>
 </nav>

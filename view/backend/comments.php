@@ -31,9 +31,11 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a class="btn btn-success mx-1" href="index.php?action=approveComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Approuver">
-                                                        <i class="fas fa-check"></i>
-                                                    </a>
+                                                    <?php if($comment->moderated == NULL): ?>
+                                                        <a class="btn btn-success mx-1" href="index.php?action=approveComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Approuver">
+                                                            <i class="fas fa-check"></i>
+                                                        </a>
+                                                    <?php endif ?>
                                                     <a class="btn btn-warning mx-1" href="index.php?action=modifyComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>

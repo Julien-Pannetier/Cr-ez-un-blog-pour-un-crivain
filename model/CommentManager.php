@@ -2,7 +2,7 @@
 class CommentManager extends Database {
 
     public function getAllComments() {
-        $query = 'SELECT id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments ORDER BY comment_date DESC';
+        $query = 'SELECT id, author, comment, moderated, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments ORDER BY comment_date DESC';
         
         return $this->query($query);
     }
@@ -16,7 +16,7 @@ class CommentManager extends Database {
 
 
     public function postComment($postId, $author, $authorEmail, $comment) {
-        $query = 'INSERT INTO comments(post_id, author, author_email, comment, comment_date) VALUES(?, ?, ?, ?, NOW())';
+        $query = 'INSERT INTO comments(post_id, author, author_email, comment, comment_date, reported) VALUES(?, ?, ?, ?, NOW(), 0)';
         $affectedLines = $this->query($query, [$postId, $author, $authorEmail, $comment]);
 
         return $affectedLines;
