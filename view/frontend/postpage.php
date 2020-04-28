@@ -1,20 +1,10 @@
 <?php ob_start(); ?>
 
-<!-- Header -->
-<header id="masthead" class="masthead">
-    <div class="container d-flex h-100 align-items-center">
-        <div class="mx-auto text-center">
-            <h1 class="mx-auto my-0 text-uppercase">Jean Forteroche</h1>
-            <h2 class="text-white-50 mx-auto mt-2 mb-5">Billet simple pour l'Alaska</h2>
-        </div>
-    </div>
-</header>
-
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg bg-light" id="mainNav">
     <div class="container">
         <div class="text-left">
-            <a href="index.php" class="btn btn-primary mb-0">Retour</a>
+            <a href="index.php#blog" class="btn btn-primary mb-0">Retour</a>
         </div>
     </div>
 </nav>
@@ -25,14 +15,14 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2 class="text-black mb-4">
-                    <?= htmlspecialchars($post->title) ?>
+                    <?= $post->title ?>
                 </h2>
                 <hr class="d-none d-lg-block mb-5">
                 <p class="text-black-50 text-left mb-3">
                     <em>Publié le <?= $post->date ?></em>
                 </p>
                 <p class="text-black-50 text-justify mb-5">
-                    <?= nl2br(htmlspecialchars($post->content)) ?>
+                    <?= $post->content ?>
                 </p>
                 <a href="index.php" class="btn btn-primary my-0">Précédent</a>
                 <a href="index.php" class="btn btn-primary my-0">Suivant</a>
@@ -52,20 +42,27 @@
                 <hr class="d-none d-lg-block mb-5">
             </div>
         </div>
+
         <?php
+        if ($comments->rowCount() == 0): ?>
+            <p class="text-center mb-5">Il n’y a pas encore de commentaire à ce chapitre. Soyez le premier à réagir.</p>                
+        <?php 
+        endif;
         while ($comment = $comments->fetch())
         {
         ?>
         <div class="mb-5">
-            <p>
-                <strong><?= htmlspecialchars($comment->author) ?></strong><em>, le <?= $comment->date ?></em>
-                <a class="ml-3 text-danger" href="index.php?action=reportComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Signaler ce commentaire !">
-                    <i class="fas fa-flag"></i>
-                </a>
-            </p>
-            <p class="text-justify">
-                <?= nl2br(htmlspecialchars($comment->comment)) ?>
-            </p>
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <p>
+                    <strong><?= htmlspecialchars($comment->author) ?></strong><em>, le <?= $comment->date ?></em>
+                    <a class="ml-3 text-danger" href="index.php?action=reportComment&amp;commentId=<?= htmlspecialchars($comment->id) ?>&amp;postId=<?= htmlspecialchars($comment->post_id) ?>" title="Signaler ce commentaire !">
+                        <i class="fas fa-flag"></i>
+                    </a>
+                </p>
+                <p class="text-justify">
+                    <?= $comment->comment ?>
+                </p>
+            </div>
         </div>
         <?php
         }

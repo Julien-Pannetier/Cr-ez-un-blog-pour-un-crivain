@@ -4,7 +4,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Chapitres</h1>
+                <h1 class="my-4">Chapitres</h1>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-book-open mr-1"></i>Tous les chapitres</div>
@@ -21,16 +21,20 @@
                                 </thead>
                                 <tbody>
                                     <?php
+                                    function excerpt($string, $limit) {
+                                        $lastSpace = strpos($string, ' ', $limit);
+                                        return substr($string, 0, $lastSpace) . '...';
+                                    }
                                     while ($post = $posts->fetch())
                                     {
                                     ?>
                                         <tr>
-                                            <td><?= htmlspecialchars($post->title) ?></td>
+                                            <td><?= $post->title ?></td>
                                             <td><?= $post->date ?></td>
-                                            <td class="text-justify"><?= htmlspecialchars($post->content) ?></td>
+                                            <td class="text-justify"><?= excerpt($post->content, 500) ?></td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a class="btn btn-warning mx-1" href="index.php?action=modifyPost&amp;id=<?= htmlspecialchars($post->id) ?>" title="Modifier">
+                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayEditPost&amp;id=<?= htmlspecialchars($post->id) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
                                                     <a class="btn btn-danger mx-1" href="index.php?action=deletePost&amp;id=<?= htmlspecialchars($post->id) ?>" title="Supprimer">

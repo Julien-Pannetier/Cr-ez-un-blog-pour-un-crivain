@@ -4,7 +4,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Commentaires</h1>
+                <h1 class="my-4">Commentaires</h1>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-comments mr-1"></i>Liste des commentaires</div>
@@ -24,10 +24,10 @@
                                     {
                                     ?>
                                         <tr>
-                                            <td><?= htmlspecialchars($comment->author) ?></td>
+                                            <td><?= $comment->author ?></td>
                                             <td class="text-justify">
                                                 <em>Publié le <?= $comment->date ?></em><br>
-                                                <?= htmlspecialchars($comment->comment) ?>    
+                                                <?= $comment->comment ?>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
@@ -36,7 +36,7 @@
                                                             <i class="fas fa-check"></i>
                                                         </a>
                                                     <?php endif ?>
-                                                    <a class="btn btn-warning mx-1" href="index.php?action=modifyComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Modifier">
+                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayEditComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
                                                     <a class="btn btn-danger mx-1" href="index.php?action=deleteComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Supprimer">

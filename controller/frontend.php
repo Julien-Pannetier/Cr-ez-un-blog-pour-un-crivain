@@ -12,6 +12,7 @@ function listPosts()
 	require('./view/frontend/home.php');
 }
 
+
 function post($postId)
 {
 	$postManager = new PostManager();
@@ -29,13 +30,13 @@ function addComment($postId, $author, $authorEmail, $comment)
 	$affectedLines = $commentManager->postComment($postId, $author, $authorEmail, $comment);
 
 	if ($affectedLines === false) {
-		die("Impossible d'ajouter le commentaire !");
+		throw new Exception('Impossible d\'ajouter le commentaire !');
 	} else {
 		header('Location: index.php?action=post&id=' . $postId);
 	}
 }
 
-function reportComment($commentId)
+function reportComment($commentId, $postId)
 {
 	$commentManager = new CommentManager();
 	$reportComment = $commentManager->reportComment($commentId);
@@ -44,7 +45,7 @@ function reportComment($commentId)
         throw new Exception('Impossible de signaler le commentaire !');
     }
     else {
-        header('Location: index.php');
+        header('Location: index.php?action=post&id=' . $postId);
     }
 }
 

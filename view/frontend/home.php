@@ -92,18 +92,22 @@
             </div>
         </div>
         <?php
+        function excerpt($string, $limit) {
+            $lastSpace = strpos($string, ' ', $limit);
+            return substr($string, 0, $lastSpace) . '...';
+        }
         while ($data = $posts->fetch())
         {
         ?>
             <div class="col-lg-8 mx-auto featured-text text-center">
                 <h3>
-                    <?= htmlspecialchars($data->title) ?>
+                    <?= $data->title ?>
                 </h3>
                 <p class="text-black-50 mb-1">
                     <em>Publié le <?= $data->date ?></em>
                 </p>
                 <p class="text-black-50 text-justify mb-0">
-                    <?= nl2br(htmlspecialchars($data->content)) ?>
+                    <?= excerpt($data->content, 500) ?>
                 </p>
                 <a class="btn btn-primary" href="index.php?action=post&amp;id=<?= htmlspecialchars($data->id) ?>" >
                     Lire la suite

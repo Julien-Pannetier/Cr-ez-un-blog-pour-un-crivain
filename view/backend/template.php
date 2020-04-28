@@ -20,6 +20,18 @@
 
         <!-- Custom styles -->
         <link href="./public/css/admin.css" rel="stylesheet">
+
+        <!-- Tiny MCE -->
+        <script src="vendor/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript">
+        tinymce.init({
+            selector: '#textarea',
+            language: "fr_FR",
+            height : "380",
+            menubar: false,
+            placeholder: "Saisissez votre texte ici"
+        });
+        </script>
     </head>
 
     <body class="sb-nav-fixed">
@@ -54,7 +66,7 @@
                                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="index.php?action=posts" >Tous les chapitres</a>
-                                        <a class="nav-link" href="#">Ajouter un chapitre</a>
+                                        <a class="nav-link" href="index.php?action=addPost">Ajouter un chapitre</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link" href="index.php?action=comments">

@@ -2,16 +2,23 @@
 class CommentManager extends Database {
 
     public function getAllComments() {
-        $query = 'SELECT id, author, comment, moderated, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments ORDER BY comment_date DESC';
+        $query = 'SELECT id, post_id, author, comment, moderated, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments ORDER BY comment_date DESC';
         
         return $this->query($query);
     }
 
 
     public function getComments($postId) {
-        $query = 'SELECT id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments WHERE post_id = ? ORDER BY comment_date';
+        $query = 'SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments WHERE post_id = ? ORDER BY comment_date';
         
         return $this->query($query, [$postId]);
+    }
+
+
+    public function getComment($commentId) {
+        $query = 'SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments WHERE id = ?';
+        
+        return $this->query($query, [$commentId])->fetch();
     }
 
 
@@ -56,5 +63,12 @@ class CommentManager extends Database {
         $query = 'DELETE FROM comments WHERE id = ?';
         
         return $this->query($query, [$commentId]);
+    }
+
+
+    public function deleteComments($postId) {
+        $query = 'DELETE FROM comments WHERE post_id = ?';
+        
+        return $this->query($query, [$postId]);
     }
 }

@@ -20,4 +20,26 @@ class PostManager extends Database {
         
         return $this->query($query, [$postId])->fetch();
     }
+
+
+    public function addPost($title, $content) {
+        $query = 'INSERT INTO posts(title, content, creation_date) VALUES(?, ?, NOW())';
+        $affectedLines = $this->query($query, [$title, $content]);
+
+        return $affectedLines;
+    }
+
+
+    public function editPost($postId, $title, $content) {
+        $query = 'UPDATE posts SET title = ?, content = ?  WHERE id = ?';
+
+        return $this->query($query, [$title, $content, $postId]);
+    }
+
+
+    public function deletePost($postId) {
+        $query = 'DELETE FROM posts WHERE id = ?';
+        
+        return $this->query($query, [$postId]);
+    }
 }
