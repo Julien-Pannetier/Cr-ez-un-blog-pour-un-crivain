@@ -27,11 +27,9 @@ abstract class Database {
     protected function query($query, $parameters = null) {
         if($parameters) {
             $req = $this->checkConnection()->prepare($query);
-            $req->setFetchMode(PDO::FETCH_CLASS, static::class);
             $req->execute($parameters);
         } else {
             $req = $this->checkConnection()->query($query);
-            $req->setFetchMode(PDO::FETCH_CLASS, static::class);
         }
         return $req;
     }

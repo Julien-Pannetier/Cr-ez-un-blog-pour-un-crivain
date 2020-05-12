@@ -96,20 +96,20 @@
             $lastSpace = strpos($string, ' ', $limit);
             return substr($string, 0, $lastSpace) . '...';
         }
-        while ($data = $posts->fetch())
+        foreach ($posts as $post)
         {
         ?>
             <div class="col-lg-8 mx-auto featured-text text-center">
                 <h3>
-                    <?= $data->title ?>
+                    <?= htmlspecialchars_decode($post->title()) ?>
                 </h3>
                 <p class="text-black-50 mb-1">
-                    <em>Publié le <?= $data->date ?></em>
+                    <em>Publié le <?= $post->date() ?></em>
                 </p>
                 <p class="text-black-50 text-justify mb-0">
-                    <?= excerpt($data->content, 500) ?>
+                    <?= excerpt(htmlspecialchars_decode($post->content()), 500) ?>
                 </p>
-                <a class="btn btn-primary" href="index.php?action=post&amp;id=<?= htmlspecialchars($data->id) ?>" >
+                <a class="btn btn-primary" href="index.php?action=post&amp;id=<?= htmlspecialchars($post->id()) ?>" >
                     Lire la suite
                 </a>
             </div>

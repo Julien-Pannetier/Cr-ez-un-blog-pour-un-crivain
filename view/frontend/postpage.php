@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2 class="text-black mb-4">
-                    <?= $post->title ?>
+                    <?= htmlspecialchars_decode($post->title()) ?>
                 </h2>
                 <hr class="d-none d-lg-block mb-5">
                 <p class="text-black-50 text-left mb-3">
-                    <em>Publié le <?= $post->date ?></em>
+                    <em>Publié le <?= $post->date() ?></em>
                 </p>
                 <p class="text-black-50 text-justify mb-5">
-                    <?= $post->content ?>
+                    <?= htmlspecialchars_decode($post->content()) ?>
                 </p>
                 <a href="index.php" class="btn btn-primary my-0">Précédent</a>
                 <a href="index.php" class="btn btn-primary my-0">Suivant</a>
@@ -45,8 +45,8 @@
 
         <?php
         if ($comments->rowCount() == 0): ?>
-            <p class="text-center mb-5">Il n’y a pas encore de commentaire à ce chapitre. Soyez le premier à réagir.</p>                
-        <?php 
+            <p class="text-center mb-5">Il n’y a pas encore de commentaire à ce chapitre. Soyez le premier à réagir.</p>
+        <?php
         endif;
         while ($comment = $comments->fetch())
         {
@@ -60,7 +60,7 @@
                     </a>
                 </p>
                 <p class="text-justify">
-                    <?= $comment->comment ?>
+                    <?= htmlspecialchars($comment->comment) ?>
                 </p>
             </div>
         </div>
