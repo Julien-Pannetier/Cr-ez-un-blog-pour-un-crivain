@@ -1,4 +1,6 @@
 <?php
+require_once ('./model/Model.php');
+
 class Comment extends Model {
 
     protected $id;
@@ -16,35 +18,35 @@ class Comment extends Model {
     }
 
     // Getters
-    public function getId() {
+    public function Id() {
         return $this->id;
     }
 
-    public function getPostId() {
+    public function PostId() {
         return $this->postId;
     }
 
-    public function getAuthor() {
+    public function Author() {
         return $this->author;
     }
 
-    public function getAuthorEmail() {
+    public function AuthorEmail() {
         return $this->authorEmail;
     }
 
-    public function getComment() {
+    public function Comment() {
         return $this->comment;
     }
 
-    public function getReported() {
+    public function Reported() {
         return $this->reported;
     }
 
-    public function getModerated() {
+    public function Moderated() {
         return $this->moderated;
     }
 
-    public function getDate() {
+    public function Date() {
         return $this->date;
     }
 

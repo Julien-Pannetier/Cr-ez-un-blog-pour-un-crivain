@@ -5,7 +5,6 @@ require_once ('./model/CommentManager.php');
 class CommentController {
     // Constructor
     public function __construct() {
-        $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
     }
 
@@ -30,8 +29,8 @@ class CommentController {
         }
     }
 
-    public function getAllComments() {
-        $comments = $this->commentManager->getAllComments();
+    public function getComments() {
+        $comments = $this->commentManager->getComments();
 
         require('./view/backend/comments.php');
     }
@@ -52,13 +51,13 @@ class CommentController {
         }
     }
 
-    public function displayEditComment($commentId) {
+    public function displayUpdateComment($commentId) {
         $comment = $this->commentManager->getComment($commentId);
 
         require('./view/backend/editcomment.php');
     }
 
-    public function editComment($commentId, $comment) {
+    public function updateComment($commentId, $comment) {
         $editComment = $this->commentManager->editComment($commentId, $comment);
         $approveComment = $this->commentManager->approveComment($commentId);
 

@@ -1,22 +1,35 @@
 <?php
+require_once ('./model/Comment.php');
+
 class CommentManager extends Database {
-
-    public function getAllComments() {
-        $query = 'SELECT id, post_id, author, comment, moderated, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments ORDER BY comment_date DESC';
-        
-        return $this->query($query);
-    }
-
-    public function getComments($postId) {
-        $query = 'SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments WHERE post_id = ? ORDER BY comment_date';
-        
-        return $this->query($query, [$postId]);
-    }
 
     public function getComment($commentId) {
         $query = 'SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date FROM comments WHERE id = ?';
-        
-        return $this->query($query, [$commentId])->fetch();
+        $data = $this->query($query, [$commentId])->fetch();
+
+        return new Comment($data);
+    }
+
+    public function getComments() {
+        $comments = [];
+        $query = 'SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date, moderated FROM comments ORDER BY comment_date DESC';
+        $req = $this->query($query);
+
+        while ($data = $req->fetch()) {
+            $comments[] = new Comment($data);
+        }
+        return $comments;
+    }
+
+    public function getCommentsByPostId($postId) {
+        $comments = [];
+        $query = 'SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date, moderated FROM comments WHERE post_id = ? ORDER BY comment_date';
+        $req = $this->query($query, [$postId]);
+
+        while ($data = $req->fetch()) {
+            $comments[] = new Comment($data);
+        }
+        return $comments;
     }
 
     public function postComment($postId, $author, $authorEmail, $comment) {
@@ -33,9 +46,14 @@ class CommentManager extends Database {
     }
 
     public function getReportComments() {
+        $comments = [];
         $query = 'SELECT id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date, reported, moderated FROM comments WHERE reported > 0 AND moderated IS NULL ORDER BY reported DESC';
-        
-        return $this->query($query);
+        $req = $this->query($query);
+
+        while ($data = $req->fetch()) {
+            $comments[] = new Comment($data);
+        }
+        return $comments;
     }
 
     public function approveComment($commentId) {

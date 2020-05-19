@@ -25,27 +25,23 @@
                                         $lastSpace = strpos($string, ' ', $limit);
                                         return substr($string, 0, $lastSpace) . '...';
                                     }
-                                    while ($post = $posts->fetch())
-                                    {
-                                    ?>
+                                    foreach ($posts as $post) { ?>
                                         <tr>
-                                            <td><?= $post->title ?></td>
-                                            <td><?= $post->date ?></td>
-                                            <td class="text-justify"><?= excerpt($post->content, 500) ?></td>
+                                            <td><?= htmlspecialchars_decode($post->title()) ?></td>
+                                            <td><?= $post->date() ?></td>
+                                            <td class="text-justify"><?= excerpt(htmlspecialchars_decode($post->content()), 500) ?></td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayEditPost&amp;id=<?= htmlspecialchars($post->id) ?>" title="Modifier">
+                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayUpdatePost&amp;id=<?= htmlspecialchars($post->id()) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a class="btn btn-danger mx-1" href="index.php?action=deletePost&amp;id=<?= htmlspecialchars($post->id) ?>" title="Supprimer">
+                                                    <a class="btn btn-danger mx-1" href="index.php?action=deletePost&amp;id=<?= htmlspecialchars($post->id()) ?>" title="Supprimer">
                                                         <i class="fas fa-times"></i>
                                                     </a>
                                                 </div>
                                             </td>
                                         </tr>
-                                    <?php
-                                    }
-                                    ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>

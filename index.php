@@ -13,7 +13,7 @@ try {
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'getPosts':
-                $postController->getPosts();
+                $postController->getPosts(0, 5);
                 break;
 
             case 'post':
@@ -57,19 +57,19 @@ try {
                 break;
 
             case 'dashbord':
-                if (isset($_SESSION['admin'])) {
+                if ($_SESSION['admin'] === true) {
                     $commentController->getReportComments();
                 }
                 break;
 
             case 'posts':
-                if (isset($_SESSION['admin'])) {
+                if ($_SESSION['admin'] === true) {
                     $postController->getAllPosts();
                 }
                 break;
 
             case 'addPost':
-                if (isset($_SESSION['admin'])) {
+                if ($_SESSION['admin'] === true) {
                     if(!empty($_POST) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
                         $postController->addPost($_POST['title'], $_POST['content']);
                     }
@@ -77,10 +77,10 @@ try {
                 }
                 break;
 
-            case 'displayEditPost':
-                if (isset($_SESSION['admin'])) {
+            case 'displayUpdatePost':
+                if ($_SESSION['admin'] === true) {
                     if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                        $postController->displayEditPost($_GET['id']);
+                        $postController->displayUpdatePost($_GET['id']);
                     }
                     else {
                         throw new Exception('Aucun identifiant de chapitre envoyé !');
@@ -88,10 +88,10 @@ try {
                 }
                 break;
 
-            case 'editPost':
-                if (isset($_SESSION['admin'])) {
+            case 'updatePost':
+                if ($_SESSION['admin'] === true) {
                     if (!empty($_POST) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
-                        $postController->editPost($_GET['id'], $_POST['title'], $_POST['content']);
+                        $postController->updatePost($_GET['id'], $_POST['title'], $_POST['content']);
                     }
                     else {
                         throw new Exception('Tous les champs ne sont pas remplis !');
@@ -100,7 +100,7 @@ try {
                 break;
 
             case 'deletePost':
-                if (isset($_SESSION['admin'])) {
+                if ($_SESSION['admin'] === true) {
                     if (isset($_GET['id']) AND $_GET['id'] > 0) {
                         $postController->deletePost($_GET['id']);
                     } else {
@@ -110,13 +110,13 @@ try {
                 break;
 
             case 'comments':
-                if (isset($_SESSION['admin'])) {
-                    $commentController->getAllComments();
+                if ($_SESSION['admin'] === true) {
+                    $commentController->getComments();
                 }
                 break;
 
             case 'approveComment':
-                if (isset($_SESSION['admin'])) {
+                if ($_SESSION['admin'] === true) {
                     if (isset($_GET['id']) AND $_GET['id'] > 0) {
                         $commentController->approveComment($_GET['id']);
                     } else {
@@ -125,10 +125,10 @@ try {
                 }
                 break;
 
-            case 'displayEditComment':
-                if (isset($_SESSION['admin'])) {
+            case 'displayUpdateComment':
+                if ($_SESSION['admin'] === true) {
                     if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                        $commentController->displayEditComment($_GET['id']);
+                        $commentController->displayUpdateComment($_GET['id']);
                     }
                     else {
                         throw new Exception('Aucun identifiant de commentaire envoyé !');
@@ -136,10 +136,10 @@ try {
                 }
                 break;
 
-            case 'editComment':
-                if (isset($_SESSION['admin'])) {
+            case 'updateComment':
+                if ($_SESSION['admin'] === true) {
                     if (!empty($_POST) AND !empty($_POST['comment'])) {
-                        $commentController->editComment($_GET['id'], $_POST['comment']);
+                        $commentController->updateComment($_GET['id'], $_POST['comment']);
                     }
                     else {
                         throw new Exception('Tous les champs ne sont pas remplis !');
@@ -148,7 +148,7 @@ try {
                 break;
 
             case 'deleteComment':
-                if (isset($_SESSION['admin'])) {
+                if ($_SESSION['admin'] === true) {
                     if (isset($_GET['id']) AND $_GET['id'] > 0) {
                         $commentController->deleteComment($_GET['id']);
                     } else {
@@ -158,11 +158,11 @@ try {
                 break;
 
             default:
-                $postController->getPosts();
+                $postController->getPosts(0, 5);
                 break;
         }
     } else {
-        $postController->getPosts();
+        $postController->getPosts(0, 5);
     }
 }
 catch(Exception $e) {

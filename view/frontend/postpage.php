@@ -21,9 +21,9 @@
                 <p class="text-black-50 text-left mb-3">
                     <em>Publié le <?= $post->date() ?></em>
                 </p>
-                <p class="text-black-50 text-justify mb-5">
+                <div class="text-black-50">
                     <?= htmlspecialchars_decode($post->content()) ?>
-                </p>
+                </div>
                 <a href="index.php" class="btn btn-primary my-0">Précédent</a>
                 <a href="index.php" class="btn btn-primary my-0">Suivant</a>
             </div>
@@ -44,29 +44,25 @@
         </div>
 
         <?php
-        if ($comments->rowCount() == 0): ?>
+        if (empty($comments)): ?>
             <p class="text-center mb-5">Il n’y a pas encore de commentaire à ce chapitre. Soyez le premier à réagir.</p>
         <?php
         endif;
-        while ($comment = $comments->fetch())
-        {
-        ?>
+        foreach ($comments as $comment) { ?>
         <div class="mb-5">
             <div class="col-md-10 col-lg-8 mx-auto">
                 <p>
-                    <strong><?= htmlspecialchars($comment->author) ?></strong><em>, le <?= $comment->date ?></em>
-                    <a class="ml-3 text-danger" href="index.php?action=reportComment&amp;commentId=<?= htmlspecialchars($comment->id) ?>&amp;postId=<?= htmlspecialchars($comment->post_id) ?>" title="Signaler ce commentaire !">
+                    <strong><?= htmlspecialchars($comment->author()) ?></strong><em>, le <?= $comment->date() ?></em>
+                    <a class="ml-3 text-danger" href="index.php?action=reportComment&amp;commentId=<?= htmlspecialchars($comment->id()) ?>&amp;postId=<?= htmlspecialchars($comment->postId()) ?>" title="Signaler ce commentaire !">
                         <i class="fas fa-flag"></i>
                     </a>
                 </p>
                 <p class="text-justify">
-                    <?= htmlspecialchars($comment->comment) ?>
+                    <?= htmlspecialchars_decode($comment->comment()) ?>
                 </p>
             </div>
         </div>
-        <?php
-        }
-        ?>
+        <?php } ?>
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
                 <h3 class="text-black mt-4 mb-4">
@@ -76,7 +72,7 @@
                 <p class="mb-5">
                     Votre adresse de messagerie ne sera pas publiée.
                 </p>
-                <form action="index.php?action=addComment&amp;id=<?= $post->id ?>" method="POST">
+                <form action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-5 text-left">
                             <label for="name">NOM :</label>

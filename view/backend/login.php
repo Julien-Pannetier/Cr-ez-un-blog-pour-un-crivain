@@ -43,12 +43,6 @@
                                                 <label class="small mb-1" for="inputPassword">Mot de passe</label>
                                                 <input class="form-control py-4" id="inputPassword" name="password" type="password" placeholder="Mot de passe" required>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" id="rememberCheck" type="checkbox" name="remember" >
-                                                    <label class="custom-control-label" for="rememberCheck">Se souvenir de moi</label>
-                                                </div>
-                                            </div>
                                             <div class="form-group text-right mt-4 mb-0">
                                                 <button class="btn btn-primary" type="submit">Connexion</button>
                                             </div>

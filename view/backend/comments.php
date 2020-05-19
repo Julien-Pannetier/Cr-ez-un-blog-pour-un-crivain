@@ -20,26 +20,24 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    while ($comment = $comments->fetch())
-                                    {
-                                    ?>
+                                    foreach ($comments as $comment) { ?>
                                         <tr>
-                                            <td><?= $comment->author ?></td>
+                                            <td><?= htmlspecialchars($comment->author()) ?></td>
                                             <td class="text-justify">
-                                                <em>Publié le <?= $comment->date ?></em><br>
-                                                <?= $comment->comment ?>
+                                                <em>Publié le <?= $comment->date() ?></em><br>
+                                                <?= htmlspecialchars_decode($comment->comment()) ?>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <?php if($comment->moderated == NULL): ?>
-                                                        <a class="btn btn-success mx-1" href="index.php?action=approveComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Approuver">
+                                                    <?php if($comment->moderated() == NULL): ?>
+                                                        <a class="btn btn-success mx-1" href="index.php?action=approveComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" title="Approuver">
                                                             <i class="fas fa-check"></i>
                                                         </a>
                                                     <?php endif ?>
-                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayEditComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Modifier">
+                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayEditComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a class="btn btn-danger mx-1" href="index.php?action=deleteComment&amp;id=<?= htmlspecialchars($comment->id) ?>" title="Supprimer">
+                                                    <a class="btn btn-danger mx-1" href="index.php?action=deleteComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" title="Supprimer">
                                                         <i class="fas fa-times"></i>
                                                     </a>
                                                 </div>

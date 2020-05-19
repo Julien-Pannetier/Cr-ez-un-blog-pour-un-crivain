@@ -16,7 +16,8 @@ class LoginController {
         $user = $this->loginManager->login($email, $password);
 
         if ($user === false) {
-            throw new Exception('L\'identifiant ou le mot de passe est incorrect');
+            header('Location: index.php?action=login');
+            //throw new Exception('L\'identifiant ou le mot de passe est incorrect');
         } else {
             header('Location: index.php?action=dashbord');
         }
@@ -27,7 +28,7 @@ class LoginController {
     }
 
     public function logout() {
-        unset($_SESSION['admin']);
+        session_destroy();
         header('location:index.php');
     }
 }

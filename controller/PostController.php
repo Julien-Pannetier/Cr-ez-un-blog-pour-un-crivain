@@ -10,21 +10,21 @@ class PostController {
         $this->commentManager = new CommentManager();
     }
 
-    public function getPosts() {
-        $posts = $this->postManager->getPosts();
-
-        require('./view/frontend/home.php');
-    }
-
     public function getPost($postId) {        
         $post = $this->postManager->getPost($postId);
-        $comments = $this->commentManager->getComments($postId);
+        $comments = $this->commentManager->getCommentsByPostId($postId);
 
         require('./view/frontend/postpage.php');
     }
 
+    public function getPosts($limit, $offset) {
+        $posts = $this->postManager->getPosts($limit, $offset);
+
+        require('./view/frontend/home.php');
+    }
+
     public function getAllPosts() {
-        $posts = $this->postManager->getAllPosts();
+        $posts = $this->postManager->getPosts();
 
         require('./view/backend/posts.php');
     }
@@ -34,7 +34,8 @@ class PostController {
     }
 
     public function addPost($title, $content) {
-        $affectedLines = $this->postManager->addPost($title, $content);
+        $post = new Post([$title, $content]);
+        $affectedLines = $this->postManager->addPost($post);
 
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter un nouveau chapitre !');
@@ -43,14 +44,15 @@ class PostController {
         }
     }
 
-    public function displayEditPost($postId) {
+    public function displayUpdatePost($postId) {
         $post = $this->postManager->getPost($postId);
 
-        require('./view/backend/editpost.php');
+        require('./view/backend/updatepost.php');
     }
 
-    public function editPost($postId, $title, $content) {
-        $affectedLines = $this->postManager->editPost($postId, $title, $content);
+    public function updatePost($postId, $title, $content) {
+        $post = new Post([$postId, $title, $content]);
+        $affectedLines = $this->postManager->updatePost($post);
 
         if ($affectedLines === false) {
             throw new Exception('Impossible de modifier le chapitre !');
