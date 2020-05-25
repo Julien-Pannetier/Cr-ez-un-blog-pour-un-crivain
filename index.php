@@ -4,6 +4,8 @@ session_start();
 require_once ('./controller/PostController.php');
 require_once ('./controller/CommentController.php');
 require_once ('./controller/LoginController.php');
+require_once ('./helpers/RouterHelper.php');
+require_once ('./helpers/functions.php');
 
 $postController = new PostController();
 $commentController = new CommentController();
@@ -17,23 +19,17 @@ try {
                 break;
 
             case 'post':
-                if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                    $postController->getPost($_GET['id']);
-                } else {
-                    throw new Exception('Aucun identifiant de chapitre envoyé !');
-                }
+                $id = RouterHelper::getId($_GET);
+                $postController->getPost($id);
+                break;
 
             case 'addComment':
-                if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                    if (!empty($_POST['name']) AND !empty($_POST['email']) AND !empty($_POST['message'])) {
-                        $commentController->addComment($_GET['id'], $_POST['name'], $_POST['email'], $_POST['message']);
-                    }
-                    else {
-                        throw new Exception('Tous les champs ne sont pas remplis !');
-                    }
+                $id = RouterHelper::getId($_GET);
+                if (!empty($_POST['name']) AND !empty($_POST['email']) AND !empty($_POST['message'])) {
+                    $commentController->addComment($id, $_POST['name'], $_POST['email'], $_POST['message']);
                 }
                 else {
-                    throw new Exception('Aucun identifiant de chapitre envoyé !');
+                    throw new Exception('Tous les champs ne sont pas remplis !');
                 }
                 break;
 
@@ -57,103 +53,111 @@ try {
                 break;
 
             case 'dashbord':
-                if ($_SESSION['admin'] === true) {
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
                     $commentController->getReportComments();
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'posts':
-                if ($_SESSION['admin'] === true) {
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
                     $postController->getAllPosts();
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'addPost':
-                if ($_SESSION['admin'] === true) {
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
                     if(!empty($_POST) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
                         $postController->addPost($_POST['title'], $_POST['content']);
                     }
-                    $postController->displayAddPost();
+                    require('./view/backend/addpost.php');
+                    //$postController->displayAddPost();
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'displayUpdatePost':
-                if ($_SESSION['admin'] === true) {
-                    if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                        $postController->displayUpdatePost($_GET['id']);
-                    }
-                    else {
-                        throw new Exception('Aucun identifiant de chapitre envoyé !');
-                    }
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
+                    $id = RouterHelper::getId($_GET);
+                    $postController->displayUpdatePost($id);
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'updatePost':
-                if ($_SESSION['admin'] === true) {
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
                     if (!empty($_POST) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
-                        $postController->updatePost($_GET['id'], $_POST['title'], $_POST['content']);
+                        $id = RouterHelper::getId($_GET);
+                        $postController->updatePost($id, $_POST['title'], $_POST['content']);
                     }
                     else {
                         throw new Exception('Tous les champs ne sont pas remplis !');
                     }
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'deletePost':
-                if ($_SESSION['admin'] === true) {
-                    if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                        $postController->deletePost($_GET['id']);
-                    } else {
-                        throw new Exception('Aucun identifiant de chapitre envoyé !');
-                    }
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
+                    $id = RouterHelper::getId($_GET);
+                    $postController->deletePost($id);
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'comments':
-                if ($_SESSION['admin'] === true) {
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
                     $commentController->getComments();
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'approveComment':
-                if ($_SESSION['admin'] === true) {
-                    if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                        $commentController->approveComment($_GET['id']);
-                    } else {
-                        throw new Exception('Aucun identifiant de commentaire envoyé !');
-                    }
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
+                    $id = RouterHelper::getId($_GET);
+                    $commentController->approveComment($id);
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'displayUpdateComment':
-                if ($_SESSION['admin'] === true) {
-                    if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                        $commentController->displayUpdateComment($_GET['id']);
-                    }
-                    else {
-                        throw new Exception('Aucun identifiant de commentaire envoyé !');
-                    }
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
+                    $id = RouterHelper::getId($_GET);
+                    $commentController->displayUpdateComment($id);
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'updateComment':
-                if ($_SESSION['admin'] === true) {
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
                     if (!empty($_POST) AND !empty($_POST['comment'])) {
-                        $commentController->updateComment($_GET['id'], $_POST['comment']);
+                        $id = RouterHelper::getId($_GET);
+                        $commentController->updateComment($id, $_POST['comment']);
                     }
                     else {
                         throw new Exception('Tous les champs ne sont pas remplis !');
                     }
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 
             case 'deleteComment':
-                if ($_SESSION['admin'] === true) {
-                    if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                        $commentController->deleteComment($_GET['id']);
-                    } else {
-                        throw new Exception('Aucun identifiant de commentaire envoyé !');
-                    }
+                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
+                    $id = RouterHelper::getId($_GET);
+                    $commentController->deleteComment($_id);
+                } else {
+                    header('Location: index.php?action=login');
                 }
                 break;
 

@@ -34,8 +34,7 @@ class PostController {
     }
 
     public function addPost($title, $content) {
-        $post = new Post([$title, $content]);
-        $affectedLines = $this->postManager->addPost($post);
+        $affectedLines = $this->postManager->addPost($title, $content);
 
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter un nouveau chapitre !');
@@ -51,8 +50,7 @@ class PostController {
     }
 
     public function updatePost($postId, $title, $content) {
-        $post = new Post([$postId, $title, $content]);
-        $affectedLines = $this->postManager->updatePost($post);
+        $affectedLines = $this->postManager->updatePost($postId, $title, $content);
 
         if ($affectedLines === false) {
             throw new Exception('Impossible de modifier le chapitre !');

@@ -91,11 +91,6 @@
                 <hr class="d-none d-lg-block mb-5">
             </div>
         </div>
-        <?php
-        function excerpt($string, $limit) {
-            $lastSpace = strpos($string, ' ', $limit);
-            return substr($string, 0, $lastSpace) . '...';
-        } ?>
         <div class="col-lg-8 mx-auto text-center">
             <?php foreach ($posts as $post) { ?>  
                 <div>
@@ -106,7 +101,7 @@
                         <em>Publié le <?= $post->date() ?></em>
                     </p>
                     <div class="text-black-50">
-                        <?= excerpt(htmlspecialchars_decode($post->content()), 500) ?>
+                        <?= Functions::excerpt(htmlspecialchars_decode($post->content()), 500) ?>
                     </div>
                     <a class="btn btn-primary" href="index.php?action=post&amp;id=<?= htmlspecialchars($post->id()) ?>" >
                         Lire la suite

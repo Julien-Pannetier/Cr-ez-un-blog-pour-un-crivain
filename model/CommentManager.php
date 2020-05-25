@@ -23,7 +23,7 @@ class CommentManager extends Database {
 
     public function getCommentsByPostId($postId) {
         $comments = [];
-        $query = 'SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date, moderated FROM comments WHERE post_id = ? ORDER BY comment_date';
+        $query = 'SELECT id, post_id, author, author_email, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date, reported, moderated FROM comments WHERE post_id = ? ORDER BY comment_date';
         $req = $this->query($query, [$postId]);
 
         while ($data = $req->fetch()) {
@@ -46,14 +46,14 @@ class CommentManager extends Database {
     }
 
     public function getReportComments() {
-        $comments = [];
+        $reportComments = [];
         $query = 'SELECT id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %Hh%imin%ss") AS date, reported, moderated FROM comments WHERE reported > 0 AND moderated IS NULL ORDER BY reported DESC';
         $req = $this->query($query);
 
         while ($data = $req->fetch()) {
-            $comments[] = new Comment($data);
+            $reportComments[] = new Comment($data);
         }
-        return $comments;
+        return $reportComments;
     }
 
     public function approveComment($commentId) {
@@ -62,7 +62,7 @@ class CommentManager extends Database {
         return $this->query($query, [$commentId]);
     }
 
-    public function editComment($commentId, $comment) {
+    public function updateComment($commentId, $comment) {
         $query = 'UPDATE comments SET comment = ? WHERE id = ?';
         $affectedLines = $this->query($query, [$comment, $commentId]);
 

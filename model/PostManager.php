@@ -21,25 +21,18 @@ class PostManager extends Database {
         return $posts;
     }
 
-    public function addPost(Post $post) {
+    public function addPost($title, $content) {
         $query = 'INSERT INTO posts(title, content, creation_date) VALUES(?, ?, NOW())';
-
-        $query->bindParam(1, $post->title(), PDO::PARAM_STR);
-        $query->bindParam(2, $post->content(), PDO::PARAM_STR);
-
-
-        $affectedLines = $this->query($query);
+        $affectedLines = $this->query($query, [$title, $content]);
 
         return $affectedLines;
     }
 
-    public function updatePost(Post $post) {
+    public function updatePost($postId, $title, $content) {
         $query = 'UPDATE posts SET title = ?, content = ? WHERE id = ?';
-        $query->bindValue('1', $post->title(), PDO::PARAM_STR);
-        $query->bindValue('2', $post->content(), PDO::PARAM_STR);
-        $query->bindValue('3', $post->id(), PDO::PARAM_INT);
+        $affectedLines = $this->query($query, [$title, $content, $postId]);
 
-        return $this->query($query);
+        return $affectedLines;
     }
 
     public function deletePost($postId) {

@@ -26,6 +26,14 @@
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
+                    <?php if(isset($errorMessage)): ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <?= $errorMessage ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif ?>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">

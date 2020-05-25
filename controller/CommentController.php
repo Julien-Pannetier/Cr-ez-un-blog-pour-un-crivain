@@ -58,7 +58,7 @@ class CommentController {
     }
 
     public function updateComment($commentId, $comment) {
-        $editComment = $this->commentManager->editComment($commentId, $comment);
+        $editComment = $this->commentManager->updateComment($commentId, $comment);
         $approveComment = $this->commentManager->approveComment($commentId);
 
         if ($editComment === false) {

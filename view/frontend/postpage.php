@@ -48,7 +48,17 @@
             <p class="text-center mb-5">Il n’y a pas encore de commentaire à ce chapitre. Soyez le premier à réagir.</p>
         <?php
         endif;
-        foreach ($comments as $comment) { ?>
+        foreach ($comments as $comment) { 
+            var_dump($comment->Id());
+            var_dump($comment->postId());
+            var_dump($comment->author());
+            var_dump($comment->authorEmail());            
+            var_dump($comment->date());
+            var_dump($comment->comment());
+            var_dump($comment->reported());
+            var_dump($comment->moderated());
+            die();
+            ?>
         <div class="mb-5">
             <div class="col-md-10 col-lg-8 mx-auto">
                 <p>

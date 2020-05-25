@@ -52,27 +52,42 @@ class Comment extends Model {
 
     // Setters
     public function setId($id) {
-        $this->id = $id;
+        $id = (int) $id;
+        if ($id > 0) {
+            $this->id = $id;
+        }
     }
 
     public function setPostId($postId) {
-        $this->postId = $postId;
+        $postId = (int) $postId;
+        if ($postId > 0) {
+            $this->postId = $postId;
+        }
     }
 
     public function setAuthor($author) {
-        $this->author = $author;
+        if (is_string($author)) {
+            $this->author = $author;
+        }
     }
 
     public function setAuthorEmail($authorEmail) {
-        $this->authorEmail = $authorEmail;
+        if (is_string($authorEmail)) {
+            $this->authorEmail = $authorEmail;
+        }
     }
 
     public function setComment($comment) {
-        $this->comment = $comment;
+        if (is_string($comment)) {
+            $this->comment = $comment;
+        }
     }
 
     public function setReported($reported) {
-        $this->reported = $reported;
+        $reported = (int) $reported;
+        if ($reported > 0) {
+            $this->reported = $reported;
+        }
     }
 
     public function setModerated($moderated) {

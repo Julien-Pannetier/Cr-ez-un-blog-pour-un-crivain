@@ -65,7 +65,7 @@
                                 </a>
                                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="index.php?action=posts" >Tous les chapitres</a>
+                                        <a class="nav-link" href="index.php?action=posts">Tous les chapitres</a>
                                         <a class="nav-link" href="index.php?action=addPost">Ajouter un chapitre</a>
                                     </nav>
                                 </div>

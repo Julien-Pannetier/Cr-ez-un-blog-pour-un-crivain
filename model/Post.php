@@ -32,15 +32,22 @@ class Post extends Model {
 
     // Setters
     public function setId($id) {
-        $this->id = $id;
+        $id = (int) $id;
+        if ($id > 0) {
+            $this->id = $id;
+        }
     }
 
     public function setTitle($title) {
-        $this->title = $title;
+        if (is_string($title)) {
+            $this->title = $title;
+        }
     }
 
     public function setContent($content) {
-        $this->content = $content;
+        if (is_string($content)) {
+            $this->content = $content;
+        }
     }
 
     public function setDate($date) {

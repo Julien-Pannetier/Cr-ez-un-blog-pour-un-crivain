@@ -20,16 +20,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    function excerpt($string, $limit) {
-                                        $lastSpace = strpos($string, ' ', $limit);
-                                        return substr($string, 0, $lastSpace) . '...';
-                                    }
-                                    foreach ($posts as $post) { ?>
+                                    <?php foreach ($posts as $post) { ?>
                                         <tr>
                                             <td><?= htmlspecialchars_decode($post->title()) ?></td>
                                             <td><?= $post->date() ?></td>
-                                            <td class="text-justify"><?= excerpt(htmlspecialchars_decode($post->content()), 500) ?></td>
+                                            <td class="text-justify"><?= Functions::excerpt(htmlspecialchars_decode($post->content()), 500) ?></td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <a class="btn btn-warning mx-1" href="index.php?action=displayUpdatePost&amp;id=<?= htmlspecialchars($post->id()) ?>" title="Modifier">
