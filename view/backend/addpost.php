@@ -8,11 +8,11 @@
                 <form action="" method="POST">
                     <div class="form-group">
                         <label for="title"></label>
-                        <input class="form-control rounded-0 py-4" id="title" type="text" name="title" placeholder="Saisissez votre titre ici" />
+                        <input class="form-control rounded-0 py-4" id="title" type="text" name="title" placeholder="Saisissez votre titre ici" required>
                     </div>
                     <div class="form-group">
                         <label for="textarea"></label>
-                        <textarea id="textarea" name="content"></textarea>
+                        <textarea id="textarea" name="content" required></textarea>
                     </div>
                     <div class="form-group text-right my-4">
                         <button type="submit" class="btn btn-primary">PUBLIER</button>
@@ -24,4 +24,4 @@
 </div>
 
 <?php $content = ob_get_clean(); ?>
-<?php require('template.php'); ?>
+<?php require_once('template.php'); ?>

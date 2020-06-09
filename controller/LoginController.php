@@ -9,23 +9,22 @@ class LoginController {
     }
     
     public function displayLogin() {
-        require('./view/backend/login.php');
+        require_once('./view/backend/login.php');
     }
 
     public function login($email, $password) {
         $user = $this->loginManager->login($email, $password);
 
-        if ($user === false) {
+        if (!$user) {
             $errorMessage = "Identifiant ou mot de passe incorrect";
-            //header('Location: index.php?action=login');
-            //throw new Exception('L\'identifiant ou le mot de passe est incorrect');
+            require_once('./view/backend/login.php');
         } else {
             header('Location: index.php?action=dashbord');
         }
     }
 
     public function displayDashbord() {
-        require('./view/backend/dashbord.php');
+        require_once('./view/backend/dashbord.php');
     }
 
     public function logout() {

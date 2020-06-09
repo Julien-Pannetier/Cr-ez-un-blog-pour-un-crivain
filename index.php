@@ -15,7 +15,8 @@ try {
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'getPosts':
-                $postController->getPosts(0, 5);
+                $page = RouterHelper::getPage($_GET);
+                $postController->getPosts($page);
                 break;
 
             case 'post':
@@ -25,27 +26,34 @@ try {
 
             case 'addComment':
                 $id = RouterHelper::getId($_GET);
-                if (!empty($_POST['name']) AND !empty($_POST['email']) AND !empty($_POST['message'])) {
-                    $commentController->addComment($id, $_POST['name'], $_POST['email'], $_POST['message']);
-                }
-                else {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
+                $name = RouterHelper::getNameInPost($_POST);
+                $email = RouterHelper::getEmailInPost($_POST);
+                $message = RouterHelper::getMessageInPost($_POST);
+                if(isset($name) && isset($email) && isset($message)) {
+                    $commentController->addComment($id, $name, $email, $message);
+                } else {
+                    $errorMessage = 'Impossible d\'ajouter un commentaire !';
                 }
                 break;
 
             case 'reportComment':
-                if (isset($_GET['commentId']) AND $_GET['commentId'] > 0 AND isset($_GET['postId']) AND $_GET['postId'] > 0) {
-                    $commentController->reportComment($_GET['commentId'], $_GET['postId']);
+                $commentId = RouterHelper::getCommentId($_GET);
+                $postId = RouterHelper::getPostId($_GET);
+                if(isset($commentId) && isset($postId)) {
+                    $commentController->reportComment($commentId, $postId);  
                 } else {
-                    throw new Exception('Aucun identifiant de commentaire envoyé !');
+                    $errorMessage = 'Impossible de signaler ce commentaire !';
                 }
                 break;
 
             case 'login':
-                if (!empty($_POST) AND !empty($_POST['email']) AND !empty($_POST['password'])) {
-                    $loginController->login($_POST['email'], $_POST['password']);
+                $email = RouterHelper::getEmailInPost($_POST);
+                $password = RouterHelper::getPasswordInPost($_POST);
+                if(isset($email) && isset($password)) {
+                    $loginController->login($email, $password);
+                } else {
+                    $loginController->displayLogin();                    
                 }
-                $loginController->displayLogin();
                 break;
             
             case 'logout':
@@ -53,120 +61,94 @@ try {
                 break;
 
             case 'dashbord':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    $commentController->getReportComments();
-                } else {
-                    header('Location: index.php?action=login');
-                }
+                RouterHelper::checkAuthentication($_SESSION);
+                $commentController->getReportComments();
                 break;
 
             case 'posts':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    $postController->getAllPosts();
-                } else {
-                    header('Location: index.php?action=login');
-                }
+                RouterHelper::checkAuthentication($_SESSION);
+                $postController->getAllPosts();
                 break;
 
             case 'addPost':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    if(!empty($_POST) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
-                        $postController->addPost($_POST['title'], $_POST['content']);
-                    }
-                    require('./view/backend/addpost.php');
-                    //$postController->displayAddPost();
+                RouterHelper::checkAuthentication($_SESSION);
+                $title = RouterHelper::getTitleInPost($_POST);
+                $content = RouterHelper::getContentInPost($_POST);
+                if (isset($title) && isset($content)) {
+                    $postController->addPost($title, $content);
                 } else {
-                    header('Location: index.php?action=login');
+                    $postController->displayAddPost();
                 }
                 break;
 
             case 'displayUpdatePost':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    $id = RouterHelper::getId($_GET);
-                    $postController->displayUpdatePost($id);
-                } else {
-                    header('Location: index.php?action=login');
-                }
+                RouterHelper::checkAuthentication($_SESSION);
+                $id = RouterHelper::getId($_GET);
+                $postController->displayUpdatePost($id);
                 break;
 
             case 'updatePost':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    if (!empty($_POST) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
-                        $id = RouterHelper::getId($_GET);
-                        $postController->updatePost($id, $_POST['title'], $_POST['content']);
-                    }
-                    else {
-                        throw new Exception('Tous les champs ne sont pas remplis !');
-                    }
+                RouterHelper::checkAuthentication($_SESSION);
+                $id = RouterHelper::getId($_GET);                
+                $title = RouterHelper::getTitleInPost($_POST);
+                $content = RouterHelper::getContentInPost($_POST);
+                if (isset($title) && isset($content)) {
+                    $postController->updatePost($id, $title, $content);
                 } else {
-                    header('Location: index.php?action=login');
+                    $errorMessage = 'Impossible de modifier ce chapitre !';
                 }
                 break;
 
             case 'deletePost':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    $id = RouterHelper::getId($_GET);
-                    $postController->deletePost($id);
-                } else {
-                    header('Location: index.php?action=login');
-                }
+                RouterHelper::checkAuthentication($_SESSION);
+                $id = RouterHelper::getId($_GET);
+                $postController->deletePost($id);
                 break;
 
             case 'comments':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    $commentController->getComments();
-                } else {
-                    header('Location: index.php?action=login');
-                }
+                RouterHelper::checkAuthentication($_SESSION);
+                $commentController->getComments();
                 break;
 
             case 'approveComment':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    $id = RouterHelper::getId($_GET);
-                    $commentController->approveComment($id);
-                } else {
-                    header('Location: index.php?action=login');
-                }
+                RouterHelper::checkAuthentication($_SESSION);
+                $id = RouterHelper::getId($_GET);
+                $commentController->approveComment($id);
                 break;
 
             case 'displayUpdateComment':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    $id = RouterHelper::getId($_GET);
-                    $commentController->displayUpdateComment($id);
-                } else {
-                    header('Location: index.php?action=login');
-                }
+                RouterHelper::checkAuthentication($_SESSION);
+                $id = RouterHelper::getId($_GET);
+                $commentController->displayUpdateComment($id);
                 break;
 
             case 'updateComment':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    if (!empty($_POST) AND !empty($_POST['comment'])) {
-                        $id = RouterHelper::getId($_GET);
-                        $commentController->updateComment($id, $_POST['comment']);
-                    }
-                    else {
-                        throw new Exception('Tous les champs ne sont pas remplis !');
-                    }
+                RouterHelper::checkAuthentication($_SESSION);
+                $id = RouterHelper::getId($_GET);
+                $comment = RouterHelper::getCommentInPost($_POST);                
+                if (isset($comment)) {
+                    $commentController->updateComment($id, $comment);                    
                 } else {
-                    header('Location: index.php?action=login');
+                    $errorMessage = 'Impossible de modifier ce commentaire !';
                 }
                 break;
 
             case 'deleteComment':
-                if (array_key_exists('admin', $_SESSION) && $_SESSION['admin'] == true) {
-                    $id = RouterHelper::getId($_GET);
-                    $commentController->deleteComment($_id);
-                } else {
-                    header('Location: index.php?action=login');
-                }
+                RouterHelper::checkAuthentication($_SESSION);
+                $id = RouterHelper::getId($_GET);
+                $commentController->deleteComment($id);
                 break;
 
             default:
-                $postController->getPosts(0, 5);
+                $page = RouterHelper::getPage($_GET);
+                $postController->getPosts($page);
+                //$postController->getPosts(0, 5);
                 break;
         }
     } else {
-        $postController->getPosts(0, 5);
+        $page = RouterHelper::getPage($_GET);
+        $postController->getPosts($page);
+        //$postController->getPosts(0, 5);
     }
 }
 catch(Exception $e) {

@@ -11,6 +11,9 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <?php if (empty($comments)): ?>
+                                <p>Il n'y a pas de commentaire.</p>
+                                <?php else: ?>
                                 <thead>
                                     <tr>
                                         <th>Auteur</th>
@@ -45,6 +48,7 @@
                                         </tr>
                                     <?php
                                     }
+                                    endif;
                                     ?>
                                 </tbody>
                             </table>

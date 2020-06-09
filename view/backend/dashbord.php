@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <?php if (empty($reportComments)): ?>
+                                <?php if (empty($reportComments)): ?>
                                 <p>Il n’y a pas de commentaire signalé.</p>
                                 <?php else: ?>
                                 <thead>
@@ -42,7 +42,7 @@
                                                     <a class="btn btn-success mx-1" href="index.php?action=approveComment&amp;id=<?= htmlspecialchars($reportComment->id()) ?>" title="Approuver">
                                                         <i class="fas fa-check"></i>
                                                     </a>
-                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayEditComment&amp;id=<?= htmlspecialchars($reportComment->id()) ?>" title="Modifier">
+                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayUpdateComment&amp;id=<?= htmlspecialchars($reportComment->id()) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
                                                     <a class="btn btn-danger mx-1" href="index.php?action=deleteComment&amp;id=<?= htmlspecialchars($reportComment->id()) ?>" title="Supprimer">

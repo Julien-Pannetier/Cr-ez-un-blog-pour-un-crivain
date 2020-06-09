@@ -24,8 +24,6 @@
                 <div class="text-black-50">
                     <?= htmlspecialchars_decode($post->content()) ?>
                 </div>
-                <a href="index.php" class="btn btn-primary my-0">Précédent</a>
-                <a href="index.php" class="btn btn-primary my-0">Suivant</a>
             </div>
         </div>
     </div>
@@ -48,17 +46,7 @@
             <p class="text-center mb-5">Il n’y a pas encore de commentaire à ce chapitre. Soyez le premier à réagir.</p>
         <?php
         endif;
-        foreach ($comments as $comment) { 
-            var_dump($comment->Id());
-            var_dump($comment->postId());
-            var_dump($comment->author());
-            var_dump($comment->authorEmail());            
-            var_dump($comment->date());
-            var_dump($comment->comment());
-            var_dump($comment->reported());
-            var_dump($comment->moderated());
-            die();
-            ?>
+        foreach ($comments as $comment) { ?>
         <div class="mb-5">
             <div class="col-md-10 col-lg-8 mx-auto">
                 <p>
@@ -106,4 +94,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('template.php'); ?>
+<?php require_once('template.php'); ?>

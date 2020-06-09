@@ -10,34 +10,42 @@ class PostController {
         $this->commentManager = new CommentManager();
     }
 
-    public function getPost($postId) {        
+    public function getPost($postId) {
         $post = $this->postManager->getPost($postId);
-        $comments = $this->commentManager->getCommentsByPostId($postId);
+        if (!isset($post)) {
+            header('Location: index.php');
+        } else {
+            $comments = $this->commentManager->getCommentsByPostId($postId);
+        }
 
-        require('./view/frontend/postpage.php');
+        require_once('./view/frontend/postpage.php');
     }
 
-    public function getPosts($limit, $offset) {
-        $posts = $this->postManager->getPosts($limit, $offset);
+    public function getPosts($page) {
+        $postsPerPage = 5;
+        $numberOfPosts = $this->postManager->countPosts();
+        $numberOfPage = ceil($numberOfPosts/$postsPerPage);
+        $offset = ($page - 1) * $postsPerPage;
+        $posts = $this->postManager->getPosts($postsPerPage, $offset);
 
-        require('./view/frontend/home.php');
+        require_once('./view/frontend/home.php');
     }
 
     public function getAllPosts() {
-        $posts = $this->postManager->getPosts();
+        $posts = $this->postManager->getPosts(1000000, 0);
 
-        require('./view/backend/posts.php');
+        require_once('./view/backend/posts.php');
     }
 
     public function displayAddPost() {
-        require('./view/backend/addpost.php');
+        require_once('./view/backend/addpost.php');
     }
 
     public function addPost($title, $content) {
         $affectedLines = $this->postManager->addPost($title, $content);
 
         if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter un nouveau chapitre !');
+            $errorMessage = 'Impossible d\'ajouter un nouveau chapitre !';
         } else {
             header('Location: index.php?action=posts');
         }
@@ -46,14 +54,14 @@ class PostController {
     public function displayUpdatePost($postId) {
         $post = $this->postManager->getPost($postId);
 
-        require('./view/backend/updatepost.php');
+        require_once('./view/backend/updatepost.php');
     }
 
     public function updatePost($postId, $title, $content) {
         $affectedLines = $this->postManager->updatePost($postId, $title, $content);
 
         if ($affectedLines === false) {
-            throw new Exception('Impossible de modifier le chapitre !');
+            $errorMessage = 'Impossible de modifier le chapitre !';
         } else {
             header('Location: index.php?action=posts');
         }
@@ -64,7 +72,7 @@ class PostController {
         $deleteComments = $this->commentManager->deleteComments($postId);
 
         if ($deletePost === false OR $deleteComments === false) {
-            throw new Exception('Impossible de supprimer le chapitre !');
+            $errorMessage = 'Impossible de supprimer le chapitre !';
         } else {
             header('Location: index.php?action=posts');
         }

@@ -12,7 +12,7 @@ class CommentController {
         $affectedLines = $this->commentManager->postComment($postId, $author, $authorEmail, $comment);
 
         if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter le commentaire !');
+            $errorMessage = 'Impossible d\'ajouter le commentaire !';
         } else {
             header('Location: index.php?action=post&id=' . $postId);
         }
@@ -22,9 +22,9 @@ class CommentController {
         $reportComment = $this->commentManager->reportComment($commentId);
 
         if ($reportComment === false) {
-            throw new Exception('Impossible de signaler le commentaire !');
+            $errorMessage = 'Impossible de signaler le commentaire !';
         }
-        else {
+        else {            
             header('Location: index.php?action=post&id=' . $postId);
         }
     }
@@ -45,7 +45,7 @@ class CommentController {
         $approveComment = $this->commentManager->approveComment($commentId);
 
         if ($approveComment === false) {
-            throw new Exception('Impossible d\'approuver le commentaire !');
+            $errorMessage = 'Impossible d\'approuver le commentaire !';
         } else {
             header('Location: index.php?action=dashbord');
         }
@@ -54,15 +54,15 @@ class CommentController {
     public function displayUpdateComment($commentId) {
         $comment = $this->commentManager->getComment($commentId);
 
-        require('./view/backend/editcomment.php');
+        require('./view/backend/updatecomment.php');
     }
 
     public function updateComment($commentId, $comment) {
-        $editComment = $this->commentManager->updateComment($commentId, $comment);
+        $updateComment = $this->commentManager->updateComment($commentId, $comment);
         $approveComment = $this->commentManager->approveComment($commentId);
 
-        if ($editComment === false) {
-            throw new Exception('Impossible d\'éditer le commentaire !');
+        if ($updateComment === false) {
+            $errorMessage = 'Impossible de modifier le commentaire !';
         } else {
             header('Location: index.php?action=dashbord');
         }
@@ -72,7 +72,7 @@ class CommentController {
         $deleteComment = $this->commentManager->deleteComment($commentId);
 
         if ($deleteComment === false) {
-            throw new Exception('Impossible de supprimer le commentaire !');
+            $errorMessage = 'Impossible de supprimer le commentaire !';
         } else {
             header('Location: index.php?action=dashbord');
         }
