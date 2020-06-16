@@ -9,7 +9,7 @@ class CommentController {
     }
 
     public function addComment($postId, $author, $authorEmail, $comment) {
-        $affectedLines = $this->commentManager->postComment($postId, $author, $authorEmail, $comment);
+        $affectedLines = $this->commentManager->addComment($postId, $author, $authorEmail, $comment);
 
         if ($affectedLines === false) {
             $errorMessage = 'Impossible d\'ajouter le commentaire !';
@@ -64,7 +64,7 @@ class CommentController {
         if ($updateComment === false) {
             $errorMessage = 'Impossible de modifier le commentaire !';
         } else {
-            header('Location: index.php?action=dashbord');
+            header('Location: index.php?action=comments');
         }
     }
 

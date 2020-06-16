@@ -5,7 +5,7 @@
         <main>
             <div class="container-fluid">
                 <h1 class="my-4">Ajouter un nouveau chapitre</h1>
-                <form action="" method="POST">
+                <form action="index.php?action=addPost" method="POST">
                     <div class="form-group">
                         <label for="title"></label>
                         <input class="form-control rounded-0 py-4" id="title" type="text" name="title" placeholder="Saisissez votre titre ici" required>

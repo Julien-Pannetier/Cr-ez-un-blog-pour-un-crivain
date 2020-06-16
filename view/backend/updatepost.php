@@ -8,11 +8,11 @@
                 <form action="index.php?action=updatePost&amp;id=<?= htmlspecialchars($post->id()) ?>" method="POST">
                     <div class="form-group">
                         <label for="title"></label>
-                        <input class="form-control rounded-0 py-4" id="title" type="text" name="title" placeholder="Saisissez votre titre ici" value="<?= htmlspecialchars_decode($post->title()) ?>" />
+                        <input class="form-control rounded-0 py-4" id="title" type="text" name="title" placeholder="Saisissez votre titre ici" value="<?= htmlspecialchars_decode($post->title()) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="textarea"></label>
-                        <textarea id="textarea" name="content"><?= htmlspecialchars_decode($post->content()) ?></textarea>
+                        <textarea id="textarea" name="content" required><?= htmlspecialchars_decode($post->content()) ?></textarea>
                     </div>
                     <div class="form-group text-right my-4">
                         <button type="submit" class="btn btn-primary">MODIFIER</button>

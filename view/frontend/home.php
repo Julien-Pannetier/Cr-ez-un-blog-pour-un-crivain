@@ -50,12 +50,12 @@
 </nav>
 
 <!-- About Section -->
-<section id="about" class="about-section text-center">
+<section id="about" class="section about-section text-center">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2 class="text-black mb-4">A PROPOS</h2>
-                <hr class="d-none d-lg-block mb-5">
+                <hr class="mb-5">
             </div>
         </div>
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
@@ -73,7 +73,7 @@
                             <p class="mb-0 text-white-50">
                                 Fusce congue, arcu quis commodo commodo, purus nisi euismod felis, eget placerat massa orci at risus. Vestibulum pharetra ex tellus, ut imperdiet magna tincidunt eget. Nullam faucibus, diam quis luctus scelerisque, metus ex iaculis augue, et tristique nisi quam non odio. Mauris aliquam imperdiet lacus. In efficitur rutrum odio. Quisque vehicula interdum est, a ullamcorper sem vestibulum a.
                             </p>
-                            <hr class="d-none d-lg-block mb-0 ml-0">
+                            <hr class="mb-0 ml-0">
                         </div>
                     </div>
                 </div>
@@ -83,12 +83,12 @@
 </section>
 
 <!-- Blog Section -->
-<section id="blog" class="blog-section text-center bg-light">
+<section id="blog" class="section text-center bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2 class="text-black mb-4">BILLETS DE BLOG</h2>
-                <hr class="d-none d-lg-block mb-5">
+                <hr class="mb-5">
             </div>
         </div>
         <div class="col-lg-8 mx-auto text-center">
@@ -109,16 +109,37 @@
                 </div>
             <?php } ?>
         </div>
+        <div>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <?php for ($i=1; $i <= $numberOfPage ; $i++) { 
+                        if($i == $page) { ?>
+                            <li class="page-item">
+                                <a class="btn btn-primary disabled" href="index.php?action=getPosts&amp;page=<?=$i?>#blog" >
+                                    <?= $i ?>
+                                </a>
+                            </li>
+                        <?php } else { ?>
+                            <li class="page-item">    
+                                <a class="btn btn-primary" href="index.php?action=getPosts&amp;page=<?=$i?>#blog" >
+                                    <?= $i ?>
+                                </a>
+                            </li>
+                        <?php } 
+                    } ?>
+                </ul>
+            </nav>
+        </div>
     </div>
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="contact-section">
+<section id="contact" class="section">
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
                 <h2 class="text-black mb-4">CONTACT</h2>
-                <hr class="d-none d-lg-block mb-5">
+                <hr class="mb-5">
                 <p class="mb-5">
                     Pour me contacter, veuillez utiliser le formulaire ci-dessous.
                 </p>

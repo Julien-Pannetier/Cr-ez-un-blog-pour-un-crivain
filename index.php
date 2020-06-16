@@ -70,6 +70,11 @@ try {
                 $postController->getAllPosts();
                 break;
 
+            case 'displayAddPost':
+                RouterHelper::checkAuthentication($_SESSION);
+                $postController->displayAddPost();
+                break;
+
             case 'addPost':
                 RouterHelper::checkAuthentication($_SESSION);
                 $title = RouterHelper::getTitleInPost($_POST);
@@ -77,7 +82,7 @@ try {
                 if (isset($title) && isset($content)) {
                     $postController->addPost($title, $content);
                 } else {
-                    $postController->displayAddPost();
+                    $errorMessage = 'Impossible d\'ajouter ce chapitre !';
                 }
                 break;
 
@@ -142,13 +147,11 @@ try {
             default:
                 $page = RouterHelper::getPage($_GET);
                 $postController->getPosts($page);
-                //$postController->getPosts(0, 5);
                 break;
         }
     } else {
         $page = RouterHelper::getPage($_GET);
         $postController->getPosts($page);
-        //$postController->getPosts(0, 5);
     }
 }
 catch(Exception $e) {

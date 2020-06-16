@@ -37,7 +37,7 @@
                                                             <i class="fas fa-check"></i>
                                                         </a>
                                                     <?php endif ?>
-                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayEditComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" title="Modifier">
+                                                    <a class="btn btn-warning mx-1" href="index.php?action=displayUpdateComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
                                                     <a class="btn btn-danger mx-1" href="index.php?action=deleteComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" title="Supprimer">

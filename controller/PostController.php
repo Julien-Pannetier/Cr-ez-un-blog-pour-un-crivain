@@ -26,13 +26,17 @@ class PostController {
         $numberOfPosts = $this->postManager->countPosts();
         $numberOfPage = ceil($numberOfPosts/$postsPerPage);
         $offset = ($page - 1) * $postsPerPage;
-        $posts = $this->postManager->getPosts($postsPerPage, $offset);
-
-        require_once('./view/frontend/home.php');
+        $posts = $this->postManager->getPosts($offset, $postsPerPage);
+        
+        if (empty($posts)) {
+            header('Location: index.php');
+        } else {
+            require_once('./view/frontend/home.php');
+        }
     }
 
     public function getAllPosts() {
-        $posts = $this->postManager->getPosts(1000000, 0);
+        $posts = $this->postManager->getPosts(0, 1000000);
 
         require_once('./view/backend/posts.php');
     }
@@ -45,9 +49,10 @@ class PostController {
         $affectedLines = $this->postManager->addPost($title, $content);
 
         if ($affectedLines === false) {
-            $errorMessage = 'Impossible d\'ajouter un nouveau chapitre !';
+            $errorMessage = 'Impossible d\'ajouter le chapitre !';
         } else {
-            header('Location: index.php?action=posts');
+            require_once('./view/backend/posts.php');
+            //header('Location: index.php?action=posts');
         }
     }
 

@@ -7,8 +7,7 @@ abstract class Database {
 
     private $connection;
 
-
-    private function checkConnection() {
+    protected function checkConnection() {
         if($this->connection === null) {
             return $this->dbConnection();
         }
@@ -21,16 +20,5 @@ abstract class Database {
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         return $this->connection;
-    }
-
-
-    protected function query($query, $parameters = null) {
-        if($parameters) {
-            $req = $this->checkConnection()->prepare($query);
-            $req->execute($parameters);
-        } else {
-            $req = $this->checkConnection()->query($query);
-        }
-        return $req;
     }
 }

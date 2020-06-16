@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
+        <meta name="description" content="Nam condimentum sapien et purus convallis euismod. Praesent blandit eget ligula id placerat. Nunc quis dignissim quam. Duis quis orci erat. Nunc eros justo, placerat dapibus sollicitudin non, lacinia eu nibh.">
 
         <title><?= $title ?></title>
 
@@ -66,7 +66,7 @@
                                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="index.php?action=posts">Tous les chapitres</a>
-                                        <a class="nav-link" href="index.php?action=addPost">Ajouter un chapitre</a>
+                                        <a class="nav-link" href="index.php?action=displayAddPost">Ajouter un chapitre</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link" href="index.php?action=comments">

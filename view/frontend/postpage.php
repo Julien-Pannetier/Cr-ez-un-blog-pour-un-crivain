@@ -10,14 +10,14 @@
 </nav>
 
 <!-- Post Section  -->
-<section id="post" class="post-section text-center bg-light">
+<section id="post" class="section text-center bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2 class="text-black mb-4">
                     <?= htmlspecialchars_decode($post->title()) ?>
                 </h2>
-                <hr class="d-none d-lg-block mb-5">
+                <hr class="mb-5">
                 <p class="text-black-50 text-left mb-3">
                     <em>Publié le <?= $post->date() ?></em>
                 </p>
@@ -30,14 +30,14 @@
 </section>
 
 <!-- Comment Section -->
-<section id="comment" class="comment-section">
+<section id="comment" class="section">
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
                 <h2 class="text-black mb-4">
                     COMMENTAIRES
                 </h2>
-                <hr class="d-none d-lg-block mb-5">
+                <hr class="mb-5">
             </div>
         </div>
 
@@ -66,7 +66,7 @@
                 <h3 class="text-black mt-4 mb-4">
                     LAISSER UN COMMENTAIRE
                 </h3>
-                <hr class="d-none d-lg-block mb-5">
+                <hr class="mb-5">
                 <p class="mb-5">
                     Votre adresse de messagerie ne sera pas publiée.
                 </p>
