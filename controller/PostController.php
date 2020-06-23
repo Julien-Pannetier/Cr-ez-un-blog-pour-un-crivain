@@ -50,9 +50,9 @@ class PostController {
 
         if ($affectedLines === false) {
             $errorMessage = 'Impossible d\'ajouter le chapitre !';
+            require_once('./view/backend/dashbord.php');
         } else {
-            require_once('./view/backend/posts.php');
-            //header('Location: index.php?action=posts');
+            header('Location: index.php?action=posts');
         }
     }
 
@@ -67,6 +67,7 @@ class PostController {
 
         if ($affectedLines === false) {
             $errorMessage = 'Impossible de modifier le chapitre !';
+            require_once('./view/backend/dashbord.php');
         } else {
             header('Location: index.php?action=posts');
         }
@@ -78,6 +79,7 @@ class PostController {
 
         if ($deletePost === false OR $deleteComments === false) {
             $errorMessage = 'Impossible de supprimer le chapitre !';
+            require_once('./view/backend/dashbord.php');
         } else {
             header('Location: index.php?action=posts');
         }

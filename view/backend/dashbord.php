@@ -4,6 +4,14 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
+                <?php if(isset($errorMessage)): ?>
+                    <div class="alert alert-warning alert-dismissible fade show col-lg-5 mx-auto mt-5" role="alert">
+                        <?= $errorMessage ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php endif; ?>
                 <h1 class="my-4">Tableau de bord</h1>
                 <div class="card mb-4">
                     <div class="card-header">

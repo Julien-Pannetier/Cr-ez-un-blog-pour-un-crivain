@@ -12,7 +12,7 @@ class CommentController {
         $affectedLines = $this->commentManager->addComment($postId, $author, $authorEmail, $comment);
 
         if ($affectedLines === false) {
-            $errorMessage = 'Impossible d\'ajouter le commentaire !';
+            header('Location: index.php');
         } else {
             header('Location: index.php?action=post&id=' . $postId);
         }
@@ -22,9 +22,9 @@ class CommentController {
         $reportComment = $this->commentManager->reportComment($commentId);
 
         if ($reportComment === false) {
-            $errorMessage = 'Impossible de signaler le commentaire !';
+            header('Location: index.php');
         }
-        else {            
+        else {
             header('Location: index.php?action=post&id=' . $postId);
         }
     }
@@ -32,13 +32,13 @@ class CommentController {
     public function getComments() {
         $comments = $this->commentManager->getComments();
 
-        require('./view/backend/comments.php');
+        require_once('./view/backend/comments.php');
     }
 
     public function getReportComments() {
         $reportComments = $this->commentManager->getReportComments();
 
-        require('./view/backend/dashbord.php');
+        require_once('./view/backend/dashbord.php');
     }
 
     public function approveComment($commentId) {
@@ -46,6 +46,7 @@ class CommentController {
 
         if ($approveComment === false) {
             $errorMessage = 'Impossible d\'approuver le commentaire !';
+            require_once('./view/backend/dashbord.php');
         } else {
             header('Location: index.php?action=dashbord');
         }
@@ -54,7 +55,7 @@ class CommentController {
     public function displayUpdateComment($commentId) {
         $comment = $this->commentManager->getComment($commentId);
 
-        require('./view/backend/updatecomment.php');
+        require_once('./view/backend/updatecomment.php');
     }
 
     public function updateComment($commentId, $comment) {
@@ -63,6 +64,7 @@ class CommentController {
 
         if ($updateComment === false) {
             $errorMessage = 'Impossible de modifier le commentaire !';
+            require_once('./view/backend/dashbord.php');
         } else {
             header('Location: index.php?action=comments');
         }
@@ -73,6 +75,7 @@ class CommentController {
 
         if ($deleteComment === false) {
             $errorMessage = 'Impossible de supprimer le commentaire !';
+            require_once('./view/backend/dashbord.php');
         } else {
             header('Location: index.php?action=dashbord');
         }

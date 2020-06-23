@@ -74,16 +74,16 @@
                     <div class="form-row">
                         <div class="form-group col-md-5 text-left">
                             <label for="name">NOM :</label>
-                            <input type="text" name="name" id="name">
+                            <input type="text" name="name" id="name" required>
                         </div>
                         <div class="form-group col-md-6 offset-md-1 text-left">
                             <label for="email">ADRESSE DE MESSAGERIE :</label>
-                            <input type="email" name="email" id="email">
+                            <input type="email" name="email" id="email" required>
                         </div>
                     </div>
                     <div class="form-group text-left">
                         <label for="message">MESSAGE :</label>
-                        <textarea id="message" name="message"></textarea>
+                        <textarea id="message" name="message" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">ENVOYER</button>
                 </form>

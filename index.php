@@ -32,7 +32,8 @@ try {
                 if(isset($name) && isset($email) && isset($message)) {
                     $commentController->addComment($id, $name, $email, $message);
                 } else {
-                    $errorMessage = 'Impossible d\'ajouter un commentaire !';
+                    $page = RouterHelper::getPage($_GET);
+                    $postController->getPosts($page);
                 }
                 break;
 
@@ -42,7 +43,8 @@ try {
                 if(isset($commentId) && isset($postId)) {
                     $commentController->reportComment($commentId, $postId);  
                 } else {
-                    $errorMessage = 'Impossible de signaler ce commentaire !';
+                    $page = RouterHelper::getPage($_GET);
+                    $postController->getPosts($page);
                 }
                 break;
 
@@ -82,7 +84,8 @@ try {
                 if (isset($title) && isset($content)) {
                     $postController->addPost($title, $content);
                 } else {
-                    $errorMessage = 'Impossible d\'ajouter ce chapitre !';
+                    $page = RouterHelper::getPage($_GET);
+                    $postController->getPosts($page);
                 }
                 break;
 
@@ -100,7 +103,8 @@ try {
                 if (isset($title) && isset($content)) {
                     $postController->updatePost($id, $title, $content);
                 } else {
-                    $errorMessage = 'Impossible de modifier ce chapitre !';
+                    $page = RouterHelper::getPage($_GET);
+                    $postController->getPosts($page);
                 }
                 break;
 
@@ -134,7 +138,8 @@ try {
                 if (isset($comment)) {
                     $commentController->updateComment($id, $comment);                    
                 } else {
-                    $errorMessage = 'Impossible de modifier ce commentaire !';
+                    $page = RouterHelper::getPage($_GET);
+                    $postController->getPosts($page);
                 }
                 break;
 
@@ -154,6 +159,6 @@ try {
         $postController->getPosts($page);
     }
 }
-catch(Exception $e) {
-    $errorMessage = $e->getMessage();
+catch (Exception $e) {
+    require_once ("./view/frontend/error.php");
 }
