@@ -29,17 +29,14 @@
         <footer class="bg-black small text-center text-white-50">
             <div class="container">
                 <div class="social d-flex justify-content-center">
-                    <a href="https://www.twitter.com" class="mx-2">
+                    <a href="https://www.twitter.com" class="mx-2" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="https://www.facebook.com" class="mx-2">
+                    <a href="https://www.facebook.com" class="mx-2" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.instagram.com" class="mx-2">
+                    <a href="https://www.instagram.com" class="mx-2" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="index.php?action=login" class="mx-2">
-                        <i class="fas fa-sign-in-alt"></i>
                     </a>
                 </div>
             </div>

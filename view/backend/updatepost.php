@@ -12,7 +12,7 @@
                     </div>
                     <div class="form-group">
                         <label for="textarea"></label>
-                        <textarea id="textarea" name="content" required><?= htmlspecialchars_decode($post->content()) ?></textarea>
+                        <textarea id="textarea" name="content"><?= htmlspecialchars_decode($post->content()) ?></textarea>
                     </div>
                     <div class="form-group text-right my-4">
                         <button type="submit" class="btn btn-primary">MODIFIER</button>
