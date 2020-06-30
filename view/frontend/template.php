@@ -13,6 +13,9 @@
         <!-- Bootstrap core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- Toastr CSS -->
+        <link href="vendor/toastr/toastr.min.css" rel="stylesheet">
+
         <!-- Custom fonts -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
@@ -45,6 +48,34 @@
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Toastr JavaScript -->
+        <script src="vendor/toastr/toastr.min.js"></script>
+        <script>            
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            <?php if(isset($_SESSION['flash'])): ?>
+                Command: toastr["<?php echo $_SESSION['flash']['type']; ?>"]("<?php echo $_SESSION['flash']['msg']; ?>")
+            <?php 
+                unset($_SESSION['flash']);
+                endif;
+            ?>
+        </script>
 
         <!-- Plugin JavaScript -->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

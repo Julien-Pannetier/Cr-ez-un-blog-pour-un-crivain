@@ -12,18 +12,19 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <?php if (empty($comments)): ?>
-                                <p>Il n'y a pas de commentaire.</p>
+                                    <p>
+                                        Il n'y a pas de commentaire.
+                                    </p>
                                 <?php else: ?>
-                                <thead>
-                                    <tr>
-                                        <th>Auteur</th>
-                                        <th>Commentaire</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($comments as $comment) { ?>
+                                    <thead>
+                                        <tr>
+                                            <th>Auteur</th>
+                                            <th>Commentaire</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($comments as $comment) { ?>
                                         <tr>
                                             <td><?= htmlspecialchars($comment->author()) ?></td>
                                             <td class="text-justify">
@@ -36,7 +37,7 @@
                                                         <a class="btn btn-success mx-1" href="index.php?action=approveComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" title="Approuver">
                                                             <i class="fas fa-check"></i>
                                                         </a>
-                                                    <?php endif ?>
+                                                    <?php endif; ?>
                                                     <a class="btn btn-warning mx-1" href="index.php?action=displayUpdateComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" title="Modifier">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
@@ -46,11 +47,9 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    <?php
-                                    }
-                                    endif;
-                                    ?>
-                                </tbody>
+                                    <?php } ?>
+                                    </tbody>
+                                <?php endif; ?>
                             </table>
                         </div>
                     </div>
@@ -60,4 +59,5 @@
     </div>
 </div>
 <?php $content = ob_get_clean(); ?>
+
 <?php require('template.php'); ?>

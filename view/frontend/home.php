@@ -69,7 +69,7 @@
         </div>
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
             <div class="col-lg-6">
-                <img class="img-fluid" src="./public/images/portrait.jpg" alt="">
+                <img class="img-fluid" src="./public/images/portrait.jpg" alt="Portrait de Jean Forteroche">
             </div>
             <div class="col-lg-6">
                 <div class="bg-black text-center h-100 about">
@@ -134,8 +134,8 @@
                                     <?= $i ?>
                                 </a>
                             </li>
-                        <?php } 
-                    } ?>
+                        <?php } ?>
+                    <?php } ?>
                 </ul>
             </nav>
         </div>
@@ -173,6 +173,7 @@
         </div>
     </div>
 </section>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once('template.php'); ?>

@@ -17,7 +17,6 @@ class PostController {
         } else {
             $comments = $this->commentManager->getCommentsByPostId($postId);
         }
-
         require_once('./view/frontend/postpage.php');
     }
 
@@ -27,7 +26,6 @@ class PostController {
         $numberOfPage = ceil($numberOfPosts/$postsPerPage);
         $offset = ($page - 1) * $postsPerPage;
         $posts = $this->postManager->getPosts($offset, $postsPerPage);
-        
         if (empty($posts)) {
             header('Location: index.php');
         } else {
@@ -37,7 +35,6 @@ class PostController {
 
     public function getAllPosts() {
         $posts = $this->postManager->getPosts(0, 1000000);
-
         require_once('./view/backend/posts.php');
     }
 
@@ -47,18 +44,17 @@ class PostController {
 
     public function addPost($title, $content) {
         $affectedLines = $this->postManager->addPost($title, $content);
-
         if ($affectedLines === false) {
-            $errorMessage = 'Impossible d\'ajouter le chapitre !';
+            Functions::flash('Impossible d\'ajouter le chapitre !', 'error');
             require_once('./view/backend/dashbord.php');
         } else {
+            Functions::flash('Le chapitre a bien été ajouté !', 'success');
             header('Location: index.php?action=posts');
         }
     }
 
     public function displayUpdatePost($postId) {
         $post = $this->postManager->getPost($postId);
-
         require_once('./view/backend/updatepost.php');
     }
 
@@ -66,9 +62,10 @@ class PostController {
         $affectedLines = $this->postManager->updatePost($postId, $title, $content);
 
         if ($affectedLines === false) {
-            $errorMessage = 'Impossible de modifier le chapitre !';
+            Functions::flash('Impossible de modifier le chapitre !', 'error');
             require_once('./view/backend/dashbord.php');
         } else {
+            Functions::flash('Le chapitre a bien été modifié !', 'success');
             header('Location: index.php?action=posts');
         }
     }
@@ -78,9 +75,10 @@ class PostController {
         $deleteComments = $this->commentManager->deleteComments($postId);
 
         if ($deletePost === false OR $deleteComments === false) {
-            $errorMessage = 'Impossible de supprimer le chapitre !';
+            Functions::flash('Impossible de supprimer le chapitre !', 'error');
             require_once('./view/backend/dashbord.php');
         } else {
+            Functions::flash('Le chapitre a bien été supprimé !', 'success');
             header('Location: index.php?action=posts');
         }
     }

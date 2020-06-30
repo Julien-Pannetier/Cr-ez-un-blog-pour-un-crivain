@@ -12,8 +12,10 @@ class CommentController {
         $affectedLines = $this->commentManager->addComment($postId, $author, $authorEmail, $comment);
 
         if ($affectedLines === false) {
+            Functions::flash('Impossible d\'ajouter le commentaire !', 'error');
             header('Location: index.php');
         } else {
+            Functions::flash('Le commentaire a bien été ajouté !', 'success');
             header('Location: index.php?action=post&id=' . $postId);
         }
     }
@@ -22,9 +24,11 @@ class CommentController {
         $reportComment = $this->commentManager->reportComment($commentId);
 
         if ($reportComment === false) {
+            Functions::flash('Impossible de signaler le commentaire !', 'error');
             header('Location: index.php');
         }
         else {
+            Functions::flash('Le commentaire a bien été signalé !', 'success');
             header('Location: index.php?action=post&id=' . $postId);
         }
     }
@@ -45,9 +49,10 @@ class CommentController {
         $approveComment = $this->commentManager->approveComment($commentId);
 
         if ($approveComment === false) {
-            $errorMessage = 'Impossible d\'approuver le commentaire !';
+            Functions::flash('Impossible d\'approuver le commentaire !', 'error');
             require_once('./view/backend/dashbord.php');
         } else {
+            Functions::flash('Le commentaire a bien été approuvé !', 'success');
             header('Location: index.php?action=dashbord');
         }
     }
@@ -63,9 +68,10 @@ class CommentController {
         $approveComment = $this->commentManager->approveComment($commentId);
 
         if ($updateComment === false) {
-            $errorMessage = 'Impossible de modifier le commentaire !';
+            Functions::flash('Impossible de modifier le commentaire !', 'error');
             require_once('./view/backend/dashbord.php');
         } else {
+            Functions::flash('Le commentaire a bien été modifié !', 'success');
             header('Location: index.php?action=comments');
         }
     }
@@ -74,9 +80,10 @@ class CommentController {
         $deleteComment = $this->commentManager->deleteComment($commentId);
 
         if ($deleteComment === false) {
-            $errorMessage = 'Impossible de supprimer le commentaire !';
+            Functions::flash('Impossible de supprimer le commentaire !', 'error');
             require_once('./view/backend/dashbord.php');
         } else {
+            Functions::flash('Le commentaire a bien été supprimé !', 'success');
             header('Location: index.php?action=dashbord');
         }
     }

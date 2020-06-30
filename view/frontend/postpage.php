@@ -34,32 +34,29 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
-                <h2 class="text-black mb-4">
-                    COMMENTAIRES
-                </h2>
+                <h2 class="text-black mb-4">COMMENTAIRES</h2>
                 <hr class="mb-5">
             </div>
         </div>
-
-        <?php
-        if (empty($comments)): ?>
-            <p class="text-center mb-5">Il n’y a pas encore de commentaire à ce chapitre. Soyez le premier à réagir.</p>
-        <?php
-        endif;
-        foreach ($comments as $comment) { ?>
-        <div class="mb-5">
-            <div class="col-md-10 col-lg-8 mx-auto">
-                <p>
-                    <strong><?= htmlspecialchars($comment->author()) ?></strong><em>, le <?= $comment->date() ?></em>
-                    <a class="ml-3 text-danger" href="index.php?action=reportComment&amp;commentId=<?= htmlspecialchars($comment->id()) ?>&amp;postId=<?= htmlspecialchars($comment->postId()) ?>" title="Signaler ce commentaire !">
-                        <i class="fas fa-flag"></i>
-                    </a>
-                </p>
-                <p class="text-justify">
-                    <?= htmlspecialchars_decode($comment->comment()) ?>
-                </p>
+        <?php if (empty($comments)): ?>
+            <p class="text-center mb-5">
+                Il n’y a pas encore de commentaire à ce chapitre. Soyez le premier à réagir.
+            </p>
+        <?php endif; ?>
+        <?php foreach ($comments as $comment) { ?>
+            <div class="mb-5">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <p>
+                        <strong><?= htmlspecialchars($comment->author()) ?></strong><em>, le <?= $comment->date() ?></em>
+                        <a class="ml-3 text-danger" href="index.php?action=reportComment&amp;commentId=<?= htmlspecialchars($comment->id()) ?>&amp;postId=<?= htmlspecialchars($comment->postId()) ?>" title="Signaler ce commentaire !">
+                            <i class="fas fa-flag"></i>
+                        </a>
+                    </p>
+                    <p class="text-justify">
+                        <?= htmlspecialchars_decode($comment->comment()) ?>
+                    </p>
+                </div>
             </div>
-        </div>
         <?php } ?>
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto text-center">

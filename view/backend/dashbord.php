@@ -4,14 +4,6 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <?php if(isset($errorMessage)): ?>
-                    <div class="alert alert-warning alert-dismissible fade show col-lg-5 mx-auto mt-5" role="alert">
-                        <?= $errorMessage ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                <?php endif; ?>
                 <h1 class="my-4">Tableau de bord</h1>
                 <div class="card mb-4">
                     <div class="card-header">
@@ -21,19 +13,20 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <?php if (empty($reportComments)): ?>
-                                <p>Il n’y a pas de commentaire signalé.</p>
+                                    <p>
+                                        Il n’y a pas de commentaire signalé.
+                                    </p>
                                 <?php else: ?>
-                                <thead>
-                                    <tr>
-                                        <th>Auteur</th>
-                                        <th>Commentaire</th>
-                                        <th>Signalements</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($reportComments as $reportComment) { ?>
+                                    <thead>
+                                        <tr>
+                                            <th>Auteur</th>
+                                            <th>Commentaire</th>
+                                            <th>Signalements</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($reportComments as $reportComment) { ?>
                                         <tr>
                                             <td><?= htmlspecialchars($reportComment->author()) ?></td>
                                             <td class="text-justify">
@@ -59,11 +52,9 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    <?php
-                                    }
-                                    endif;
-                                    ?>
-                                </tbody>
+                                    <?php } ?>
+                                    </tbody>
+                                <?php endif; ?>
                             </table>
                         </div>
                     </div>
@@ -73,4 +64,5 @@
     </div>
 </div>
 <?php $content = ob_get_clean(); ?>
+
 <?php require('template.php'); ?>

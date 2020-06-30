@@ -9,15 +9,15 @@ class LoginController {
     }
     
     public function displayLogin() {
-        require_once('./view/backend/login.php');
+        require_once('./view/frontend/login.php');
     }
 
     public function login($email, $password) {
         $user = $this->loginManager->login($email, $password);
 
         if (!$user) {
-            $errorMessage = "Identifiant ou mot de passe incorrect";
-            require_once('./view/backend/login.php');
+            Functions::flash('Identifiant / mot de passe incorrect !', 'error');
+            require_once('./view/frontend/login.php');
         } else {
             header('Location: index.php?action=dashbord');
         }

@@ -13,6 +13,9 @@
         <!-- Bootstrap core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- Toastr CSS -->
+        <link href="vendor/toastr/toastr.min.css" rel="stylesheet">
+
         <!-- Custom fonts -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
@@ -35,53 +38,81 @@
     </head>
 
     <body class="sb-nav-fixed">
-            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                <a class="navbar-brand" href="index.php"><i class="fas fa-home mr-2"></i>Jean Forteroche</a>
-                <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <!-- Navbar-->
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="index.php?action=logout">Se déconnecter</a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-            <div id="layoutSidenav">
-                <div id="layoutSidenav_nav">
-                    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                        <div class="sb-sidenav-menu">
-                            <div class="nav">
-                                <a class="nav-link" href="index.php?action=dashbord">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Tableau de bord
-                                </a>
-                                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>Chapitres
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="index.php?action=posts">Tous les chapitres</a>
-                                        <a class="nav-link" href="index.php?action=displayAddPost">Ajouter un chapitre</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link" href="index.php?action=comments">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>Commentaires
-                                </a>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.php"><i class="fas fa-home mr-2"></i>Jean Forteroche</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="index.php?action=logout">Se déconnecter</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <a class="nav-link" href="index.php?action=dashbord">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Tableau de bord
+                            </a>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>Chapitres
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="index.php?action=posts">Tous les chapitres</a>
+                                    <a class="nav-link" href="index.php?action=displayAddPost">Ajouter un chapitre</a>
+                                </nav>
                             </div>
+                            <a class="nav-link" href="index.php?action=comments">
+                                <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>Commentaires
+                            </a>
                         </div>
-                    </nav>
-                </div>
+                    </div>
+                </nav>
+            </div>
 
         <?= $content ?>
 
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Toastr JavaScript -->
+        <script src="vendor/toastr/toastr.min.js"></script>
+        <script>            
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            <?php if(isset($_SESSION['flash'])): ?>
+                Command: toastr["<?php echo $_SESSION['flash']['type']; ?>"]("<?php echo $_SESSION['flash']['msg']; ?>")
+            <?php 
+                unset($_SESSION['flash']);
+                endif;
+            ?>
+        </script>
 
         <!-- Plugin JavaScript -->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
