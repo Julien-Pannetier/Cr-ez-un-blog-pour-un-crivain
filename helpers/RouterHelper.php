@@ -52,7 +52,7 @@ class RouterHelper {
 
     public static function getContentInPost($post) {
         $content = null;
-        if (isset($post) && array_key_exists('content', $post) && isset($post['content'])) {
+        if (isset($post) && array_key_exists('content', $post) && !empty($post['content'])) {
             $content = $post['content'];
         }
         return $content;
@@ -60,7 +60,7 @@ class RouterHelper {
 
     public static function getCommentInPost($post) {
         $comment = null;
-        if (isset($post) && array_key_exists('comment', $post) && isset($post['comment'])) {
+        if (isset($post) && array_key_exists('comment', $post) && !empty($post['comment'])) {
             $comment = $post['comment'];
         }
         return $comment;

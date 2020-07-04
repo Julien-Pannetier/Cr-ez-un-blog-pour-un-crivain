@@ -10,7 +10,6 @@ class CommentController {
 
     public function addComment($postId, $author, $authorEmail, $comment) {
         $affectedLines = $this->commentManager->addComment($postId, $author, $authorEmail, $comment);
-
         if ($affectedLines === false) {
             Functions::flash('Impossible d\'ajouter le commentaire !', 'error');
             header('Location: index.php');
@@ -22,7 +21,6 @@ class CommentController {
 
     public function reportComment($commentId, $postId) {
         $reportComment = $this->commentManager->reportComment($commentId);
-
         if ($reportComment === false) {
             Functions::flash('Impossible de signaler le commentaire !', 'error');
             header('Location: index.php');
@@ -35,19 +33,16 @@ class CommentController {
 
     public function getComments() {
         $comments = $this->commentManager->getComments();
-
         require_once('./view/backend/comments.php');
     }
 
     public function getReportComments() {
         $reportComments = $this->commentManager->getReportComments();
-
         require_once('./view/backend/dashbord.php');
     }
 
     public function approveComment($commentId) {
         $approveComment = $this->commentManager->approveComment($commentId);
-
         if ($approveComment === false) {
             Functions::flash('Impossible d\'approuver le commentaire !', 'error');
             require_once('./view/backend/dashbord.php');
@@ -59,14 +54,12 @@ class CommentController {
 
     public function displayUpdateComment($commentId) {
         $comment = $this->commentManager->getComment($commentId);
-
         require_once('./view/backend/updatecomment.php');
     }
 
     public function updateComment($commentId, $comment) {
         $updateComment = $this->commentManager->updateComment($commentId, $comment);
         $approveComment = $this->commentManager->approveComment($commentId);
-
         if ($updateComment === false) {
             Functions::flash('Impossible de modifier le commentaire !', 'error');
             require_once('./view/backend/dashbord.php');
@@ -78,7 +71,6 @@ class CommentController {
 
     public function deleteComment($commentId) {
         $deleteComment = $this->commentManager->deleteComment($commentId);
-
         if ($deleteComment === false) {
             Functions::flash('Impossible de supprimer le commentaire !', 'error');
             require_once('./view/backend/dashbord.php');

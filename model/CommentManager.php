@@ -9,11 +9,9 @@ class CommentManager extends Database {
         $req = $db->prepare($query);
         $req->bindParam("commentId", $commentId, PDO::PARAM_INT);
         $req->execute();
-
         while ($data = $req->fetch()) {
             $comment = new Comment($data);
         }
-
         return $comment;
     }
 
@@ -23,11 +21,9 @@ class CommentManager extends Database {
         $db = $this->checkConnection();
         $req = $db->prepare($query);
         $req->execute();
-
         while ($data = $req->fetch()) {
             $comments[] = new Comment($data);
         }
-
         return $comments;
     }
 
@@ -38,11 +34,9 @@ class CommentManager extends Database {
         $req = $db->prepare($query);
         $req->bindParam("postId", $postId, PDO::PARAM_INT);
         $req->execute();
-
         while ($data = $req->fetch()) {
             $comments[] = new Comment($data);
         }
-
         return $comments;
     }
 
@@ -55,7 +49,6 @@ class CommentManager extends Database {
         $affectedLines->bindParam("authorEmail", $authorEmail, PDO::PARAM_STR);
         $affectedLines->bindParam("comment", $comment, PDO::PARAM_STR);
         $affectedLines->execute();
-
         return $affectedLines;
     }
 
@@ -65,7 +58,6 @@ class CommentManager extends Database {
         $reportComment = $db->prepare($query);
         $reportComment->bindParam("commentId", $commentId, PDO::PARAM_INT);
         $reportComment->execute();
-        
         return $reportComment;
     }
 
@@ -75,11 +67,9 @@ class CommentManager extends Database {
         $db = $this->checkConnection();
         $req = $db->prepare($query);
         $req->execute();
-
         while ($data = $req->fetch()) {
             $reportComments[] = new Comment($data);
         }
-
         return $reportComments;
     }
 
@@ -89,7 +79,6 @@ class CommentManager extends Database {
         $approveComment = $db->prepare($query);
         $approveComment->bindParam("commentId", $commentId, PDO::PARAM_INT);
         $approveComment->execute();
-
         return $approveComment;
     }
 
@@ -100,7 +89,6 @@ class CommentManager extends Database {
         $affectedLines->bindParam("comment", $comment, PDO::PARAM_STR);
         $affectedLines->bindParam("commentId", $commentId, PDO::PARAM_INT);
         $affectedLines->execute();
-
         return $affectedLines;
     }
 
@@ -110,7 +98,6 @@ class CommentManager extends Database {
         $affectedLines = $db->prepare($query);
         $affectedLines->bindParam("commentId", $commentId, PDO::PARAM_INT);
         $affectedLines->execute();
-
         return $affectedLines;
     }
 
@@ -120,7 +107,6 @@ class CommentManager extends Database {
         $affectedLines = $db->prepare($query);
         $affectedLines->bindParam("postId", $postId, PDO::PARAM_INT);
         $affectedLines->execute();
-
         return $affectedLines;
     }
 }

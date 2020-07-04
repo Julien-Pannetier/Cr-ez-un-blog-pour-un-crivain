@@ -14,11 +14,9 @@ abstract class Database {
         return $this->connection;
     }
 
-
     private function dbConnection() {
         $this->connection = new PDO(Database::DB_HOST, Database::DB_USER, Database::DB_PASSWORD);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
         return $this->connection;
     }
 }

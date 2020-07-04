@@ -14,7 +14,6 @@ class LoginController {
 
     public function login($email, $password) {
         $user = $this->loginManager->login($email, $password);
-
         if (!$user) {
             Functions::flash('Identifiant / mot de passe incorrect !', 'error');
             require_once('./view/frontend/login.php');

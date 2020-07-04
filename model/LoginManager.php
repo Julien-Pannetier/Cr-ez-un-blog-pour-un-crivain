@@ -8,7 +8,6 @@ class LoginManager extends Database {
         $req->bindParam("email", $email, PDO::PARAM_STR);
         $req->execute();
         $user = $req->fetch();
-
         if($user AND password_verify($password, $user['password'])) {
             $_SESSION['admin'] = true;
             return $user;
