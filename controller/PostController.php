@@ -1,5 +1,4 @@
 <?php
-require_once ('./model/Database.php');
 require_once ('./model/PostManager.php');
 require_once ('./model/CommentManager.php');
 
@@ -71,8 +70,7 @@ class PostController {
 
     public function deletePost($postId) {
         $deletePost = $this->postManager->deletePost($postId);
-        $deleteComments = $this->commentManager->deleteComments($postId);
-        if ($deletePost === false OR $deleteComments === false) {
+        if ($deletePost === false) {
             Functions::flash('Impossible de supprimer le chapitre !', 'error');
             require_once('./view/backend/dashbord.php');
         } else {
