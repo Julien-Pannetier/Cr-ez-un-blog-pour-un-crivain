@@ -1,4 +1,5 @@
 <?php
+require_once ('./model/Database.php');
 require_once ('./model/Post.php');
 
 class PostManager extends Database {
@@ -9,11 +10,9 @@ class PostManager extends Database {
         $req = $db->prepare($query);
         $req->bindParam("postId", $postId, PDO::PARAM_INT);
         $req->execute();
-
         while ($data = $req->fetch()) {
             $post = new Post($data);
         }
-
         return $post;
     }
 
@@ -25,11 +24,9 @@ class PostManager extends Database {
         $req->bindParam("offset", $offset, PDO::PARAM_INT);
         $req->bindParam("limit", $limit, PDO::PARAM_INT);
         $req->execute();
-
         while ($data = $req->fetch()) {
             $posts[] = new Post($data);
         }
-
         return $posts;
     }
 
@@ -39,7 +36,6 @@ class PostManager extends Database {
         $req = $db->prepare($query);
         $req->execute();
         $numberOfPosts = $req->rowCount();
-
         return $numberOfPosts;
     }
 
@@ -50,7 +46,6 @@ class PostManager extends Database {
         $affectedLines->bindParam("title", $title, PDO::PARAM_STR);
         $affectedLines->bindParam("content", $content, PDO::PARAM_STR);
         $affectedLines->execute();
-
         return $affectedLines;
     }
 
@@ -62,7 +57,6 @@ class PostManager extends Database {
         $affectedLines->bindParam("content", $content, PDO::PARAM_STR);
         $affectedLines->bindParam("postId", $postId, PDO::PARAM_INT);
         $affectedLines->execute();
-
         return $affectedLines;
     }
 
@@ -72,7 +66,6 @@ class PostManager extends Database {
         $affectedLines = $db->prepare($query);
         $affectedLines->bindParam("postId", $postId, PDO::PARAM_INT);
         $affectedLines->execute();
-
         return $affectedLines;
     }
 }

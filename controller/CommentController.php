@@ -1,5 +1,4 @@
 <?php
-require_once ('./model/Database.php');
 require_once ('./model/CommentManager.php');
 
 class CommentController {

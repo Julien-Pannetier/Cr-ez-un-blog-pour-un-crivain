@@ -45,14 +45,14 @@
         <?php endif; ?>
         <?php foreach ($comments as $comment) { ?>
             <div class="mb-5">
-                <div class="col-md-10 col-lg-8 mx-auto">
+                <div class="col-md-10 col-lg-8 mx-auto text-justify">
                     <p>
                         <strong><?= htmlspecialchars($comment->author()) ?></strong><em>, le <?= $comment->date() ?></em>
                         <a class="ml-3 text-danger" href="index.php?action=reportComment&amp;commentId=<?= htmlspecialchars($comment->id()) ?>&amp;postId=<?= htmlspecialchars($comment->postId()) ?>" title="Signaler ce commentaire !">
                             <i class="fas fa-flag"></i>
                         </a>
                     </p>
-                    <p class="text-justify">
+                    <p>
                         <?= htmlspecialchars_decode($comment->comment()) ?>
                     </p>
                 </div>

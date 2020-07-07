@@ -1,4 +1,5 @@
 <?php
+require_once ('./model/Database.php');
 require_once ('./model/Comment.php');
 
 class CommentManager extends Database {
@@ -97,15 +98,6 @@ class CommentManager extends Database {
         $db = $this->checkConnection();
         $affectedLines = $db->prepare($query);
         $affectedLines->bindParam("commentId", $commentId, PDO::PARAM_INT);
-        $affectedLines->execute();
-        return $affectedLines;
-    }
-
-    public function deleteComments($postId) {
-        $query = 'DELETE FROM comments WHERE post_id = :postId';
-        $db = $this->checkConnection();
-        $affectedLines = $db->prepare($query);
-        $affectedLines->bindParam("postId", $postId, PDO::PARAM_INT);
         $affectedLines->execute();
         return $affectedLines;
     }

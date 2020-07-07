@@ -1,5 +1,5 @@
 <?php
-class Model {
+abstract class Model {
 
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
